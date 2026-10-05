@@ -18,12 +18,8 @@ async function generatePDF() {
     path: destPath,
     format: 'A4',
     printBackground: true,
-    margin: {
-      top: '8mm',
-      bottom: '8mm',
-      left: '10mm',
-      right: '10mm'
-    }
+    pageRanges: '1',
+    preferCSSPageSize: true
   });
 
   await browser.close();
