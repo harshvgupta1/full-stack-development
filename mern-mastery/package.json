@@ -1,0 +1,16 @@
+{
+  "name": "mern-mastery",
+  "version": "1.0.0",
+  "description": "6-month MERN mastery program with PDF generation",
+  "scripts": {
+    "pdf": "node scripts/generate-pdfs.mjs",
+    "pdf:theory": "node scripts/generate-pdfs.mjs theory",
+    "pdf:exercises": "node scripts/generate-pdfs.mjs exercises",
+    "pdf:roadmap": "node scripts/generate-pdfs.mjs roadmap",
+    "schedule": "node scripts/generate-schedule.mjs",
+    "schedule:pdf": "node scripts/generate-schedule.mjs && node scripts/generate-pdfs.mjs"
+  },
+  "devDependencies": {
+    "md-to-pdf": "^5.2.4"
+  }
+}

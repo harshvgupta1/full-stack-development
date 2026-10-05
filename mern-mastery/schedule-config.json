@@ -1,0 +1,262 @@
+{
+  "startDate": "2026-08-17",
+  "firstDayStartFrom": null,
+  "email": "harsh.gupta@getreelax.com",
+  "name": "Harsh Vardhan Gupta",
+  "timezone": "Asia/Kolkata",
+  "totalDays": 182,
+  "weekdaySlots": [
+    {
+      "label": "Evening 1",
+      "start": "19:30",
+      "end": "20:30"
+    },
+    {
+      "label": "Evening 2",
+      "start": "21:00",
+      "end": "22:00"
+    }
+  ],
+  "weekendSlots": [
+    {
+      "label": "Morning",
+      "start": "09:00",
+      "end": "12:00"
+    },
+    {
+      "label": "Afternoon",
+      "start": "15:00",
+      "end": "17:30"
+    },
+    {
+      "label": "Evening",
+      "start": "18:00",
+      "end": "20:30"
+    }
+  ],
+  "endDate": "2027-02-14",
+  "pdfRanges": [
+    {
+      "file": "00b-html-css-web-fundamentals-complete.md",
+      "start": 29,
+      "end": 30,
+      "title": "HTML/CSS Web Fundamentals"
+    },
+    {
+      "file": "01-javascript-complete.md",
+      "start": 1,
+      "end": 21,
+      "title": "JavaScript Complete"
+    },
+    {
+      "file": "02-typescript-complete.md",
+      "start": 22,
+      "end": 28,
+      "title": "TypeScript Complete"
+    },
+    {
+      "file": "00-git-complete.md",
+      "start": 22,
+      "end": 28,
+      "title": "Git Complete"
+    },
+    {
+      "file": "08b-dsa-datastructures-fundamentals-complete.md",
+      "start": 1,
+      "end": 112,
+      "title": "DSA Data Structures (parallel)"
+    },
+    {
+      "file": "03-react-complete.md",
+      "start": 29,
+      "end": 49,
+      "title": "React Complete"
+    },
+    {
+      "file": "04-nextjs-complete.md",
+      "start": 50,
+      "end": 56,
+      "title": "Next.js Complete"
+    },
+    {
+      "file": "05-nodejs-express-complete.md",
+      "start": 57,
+      "end": 63,
+      "title": "Node.js & Express"
+    },
+    {
+      "file": "07-auth-devops-complete.md",
+      "start": 64,
+      "end": 70,
+      "title": "Auth & DevOps"
+    },
+    {
+      "file": "06-databases-complete.md",
+      "start": 71,
+      "end": 84,
+      "title": "Databases (Mongo, PG, MySQL, Redis)"
+    },
+    {
+      "file": "10b-networking-http-fundamentals-complete.md",
+      "start": 78,
+      "end": 84,
+      "title": "Networking & HTTP"
+    },
+    {
+      "file": "08-dsa-patterns-complete.md",
+      "start": 113,
+      "end": 126,
+      "title": "DSA Patterns"
+    },
+    {
+      "file": "09-lld-complete.md",
+      "start": 119,
+      "end": 140,
+      "title": "LLD Complete"
+    },
+    {
+      "file": "14-advanced-dsa-hard-complete.md",
+      "start": 127,
+      "end": 140,
+      "title": "Advanced DSA Hard"
+    },
+    {
+      "file": "15-machine-coding-complete.md",
+      "start": 118,
+      "end": 140,
+      "title": "Machine Coding"
+    },
+    {
+      "file": "10c-system-design-prerequisites-complete.md",
+      "start": 141,
+      "end": 143,
+      "title": "SD Prerequisites"
+    },
+    {
+      "file": "10-system-design-complete.md",
+      "start": 141,
+      "end": 154,
+      "title": "System Design Complete"
+    },
+    {
+      "file": "11-distributed-systems-complete.md",
+      "start": 145,
+      "end": 158,
+      "title": "Distributed Systems"
+    },
+    {
+      "file": "12-microservices-kafka-complete.md",
+      "start": 151,
+      "end": 162,
+      "title": "Microservices & Kafka"
+    },
+    {
+      "file": "13-kubernetes-cloud-advanced-complete.md",
+      "start": 155,
+      "end": 165,
+      "title": "Kubernetes & Cloud"
+    },
+    {
+      "file": "16-behavioral-senior-complete.md",
+      "start": 141,
+      "end": 182,
+      "title": "Behavioral (Senior)"
+    },
+    {
+      "file": "17-interview-qa-80lpa-master.md",
+      "start": 1,
+      "end": 182,
+      "title": "Interview Q&A (tiered)"
+    },
+    {
+      "file": "18-80lpa-roadmap-addendum.md",
+      "start": 1,
+      "end": 182,
+      "title": "80 LPA Roadmap Addendum"
+    },
+    {
+      "file": "19-phases-678-easy-to-hard-complete.md",
+      "start": 113,
+      "end": 182,
+      "title": "Phases 6–8 Easy→Hard"
+    },
+    {
+      "file": "20-1cr-product-company-complete.md",
+      "start": 113,
+      "end": 182,
+      "title": "1 CR Product-Company Guide"
+    },
+    {
+      "file": "21-1cr-remaining-gaps-complete.md",
+      "start": 1,
+      "end": 182,
+      "title": "1 CR Remaining Gaps + MERN Verdict"
+    },
+    {
+      "file": "22-top-100-recruitment-processes-complete.md",
+      "start": 167,
+      "end": 182,
+      "title": "Top 100 Recruitment Processes"
+    },
+    {
+      "file": "23-top-product-companies-interview-100.md",
+      "start": 1,
+      "end": 182,
+      "title": "Top Product Companies Interview 100"
+    },
+    {
+      "file": "week-01-javascript-exercises-complete.md",
+      "start": 1,
+      "end": 7,
+      "title": "Week 1 JS Exercises"
+    },
+    {
+      "file": "week-02-javascript-exercises-complete.md",
+      "start": 8,
+      "end": 14,
+      "title": "Week 2 JS Exercises"
+    },
+    {
+      "file": "week-03-javascript-exercises-complete.md",
+      "start": 15,
+      "end": 21,
+      "title": "Week 3 JS Exercises"
+    },
+    {
+      "file": "week-04-typescript-exercises-complete.md",
+      "start": 22,
+      "end": 28,
+      "title": "Week 4 TS Exercises"
+    },
+    {
+      "file": "month-02-frontend-exercises-complete.md",
+      "start": 29,
+      "end": 56,
+      "title": "Month 2 Frontend Exercises"
+    },
+    {
+      "file": "month-03-backend-exercises-complete.md",
+      "start": 57,
+      "end": 84,
+      "title": "Month 3 Backend Exercises"
+    },
+    {
+      "file": "month-04-project-exercises-complete.md",
+      "start": 85,
+      "end": 112,
+      "title": "Month 4 Project Exercises"
+    },
+    {
+      "file": "month-05-dsa-lld-exercises-complete.md",
+      "start": 113,
+      "end": 140,
+      "title": "Month 5 DSA/LLD Exercises"
+    },
+    {
+      "file": "month-06-interview-exercises-complete.md",
+      "start": 141,
+      "end": 182,
+      "title": "Month 6 Interview Exercises"
+    }
+  ]
+}

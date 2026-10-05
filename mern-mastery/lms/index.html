@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERN Mastery LMS — 1 CR Product-Company Edition</title>
+  <meta name="description" content="Master MERN Full-Stack Engineering, System Design, DSA, and Interview Loopholes targeted for 1 Crore product company offers (Google, Meta, Amazon, Uber, Atlassian).">
+
+  <!-- Local CSS Assets -->
+  <link rel="stylesheet" href="assets/highlight-dark.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Fonts for sleek typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Application Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="menu-toggle-btn" id="menuToggleBtn" title="Toggle Sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <div class="app-brand" id="brandHomeBtn">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-title">MERN Mastery</div>
+        <span class="brand-badge">₹1 CR Bar</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="search-trigger" id="searchTriggerBtn">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Search 182 days, 1,400+ questions, loopholes...</span>
+        </div>
+        <kbd>⌘K</kbd>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button class="btn-header btn-playground" id="togglePlaygroundBtn" title="Open JavaScript & Node Code Runner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <span>Playground</span>
+      </button>
+
+      <button class="btn-header" id="printPdfBtn" title="Export Current Topic to Clean PDF">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Print PDF</span>
+      </button>
+
+      <button class="btn-header" id="themeToggleBtn" title="Toggle Light/Dark Theme">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Application Body Container -->
+  <div class="app-container" id="appContainer">
+    
+    <!-- Left Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+      <!-- Special Navigation Hubs -->
+      <div class="sidebar-nav-top">
+        <div class="nav-pill active" id="navDashboardBtn" data-target="dashboard">
+          <div class="nav-pill-left">
+            <span>📊</span>
+            <span>Study Dashboard</span>
+          </div>
+          <span class="nav-pill-badge" id="sidebarProgressBadge">0/182</span>
+        </div>
+
+        <div class="nav-pill" id="navSystemDesignBtn" data-target="systemDesign">
+          <div class="nav-pill-left">
+            <span>🌐</span>
+            <span>System Design & LLD</span>
+          </div>
+          <span class="nav-pill-badge" style="background: rgba(96,165,250,0.15); color: #2563eb; border-color: rgba(96,165,250,0.3);">HLD/LLD</span>
+        </div>
+
+        <div class="nav-pill" id="navTheoryBtn" data-target="theories">
+          <div class="nav-pill-left">
+            <span>📚</span>
+            <span>Theory Guides</span>
+          </div>
+          <span class="nav-pill-badge">30 Guides</span>
+        </div>
+
+        <div class="nav-pill" id="navBanksBtn" data-target="interviewBanks">
+          <div class="nav-pill-left">
+            <span>🎯</span>
+            <span>Interview Bank</span>
+          </div>
+          <span class="nav-pill-badge">1,400+ Qs</span>
+        </div>
+
+        <div class="nav-pill" id="navExercisesBtn" data-target="exercises">
+          <div class="nav-pill-left">
+            <span>🛠️</span>
+            <span>Practice & Exercises</span>
+          </div>
+          <span class="nav-pill-badge">9 Packs</span>
+        </div>
+      </div>
+
+      <!-- Quick Filter for Days -->
+      <div class="sidebar-filter-box">
+        <input type="text" class="filter-input" id="sidebarFilterInput" placeholder="Filter weeks & topics (e.g. React, Kafka, Closures)...">
+      </div>
+
+      <!-- 182-Day Curriculum Tree (Populated by JS) -->
+      <div class="sidebar-scroll-area" id="sidebarCurriculumTree">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Footer Progress Indicator -->
+      <div class="sidebar-footer">
+        <div class="overall-progress-bar-container">
+          <div class="progress-meta">
+            <span>1 CR Readiness</span>
+            <span id="overallPercentText">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="overallProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Reader Pane -->
+    <main class="app-content" id="appContent">
+      <div class="content-inner" id="mainContentInner">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Interactive Code Playground Drawer -->
+  <div class="playground-drawer" id="playgroundDrawer">
+    <div class="playground-header">
+      <div class="playground-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>Live JS / Node Runner</span>
+      </div>
+      <button class="btn-code-action" id="closePlaygroundBtn" title="Close Drawer" style="font-size: 1.1rem;">✕</button>
+    </div>
+
+    <div class="playground-editor-container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 0.78rem; color: var(--text-muted);">Test exercises & logic in real time:</span>
+        <select id="playgroundPresetSelect" style="background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border-accent); border-radius: 4px; padding: 3px 8px; font-size: 0.75rem;">
+          <option value="custom">-- Choose Example Snippet --</option>
+          <option value="v8Shapes">V8 Hidden Classes Benchmark</option>
+          <option value="eventLoop">Event Loop Microtask Priority</option>
+          <option value="closures">Closure Counter Pattern</option>
+          <option value="twoSum">Two Sum Optimal Map</option>
+          <option value="debounce">Debounce Implementation</option>
+          <option value="curry">Infinite Curry function</option>
+        </select>
+      </div>
+
+      <textarea class="code-textarea" id="playgroundCodeInput" spellcheck="false">// Write or paste JavaScript code here:
+console.log("Welcome to MERN Mastery Interactive Playground!");
+
+function checkV8Optimization() {
+  const start = performance.now();
+  let sum = 0;
+  for (let i = 0; i < 1_000_000; i++) {
+    sum += i;
+  }
+  const end = performance.now();
+  console.log(`Sum: ${sum} | Computed in ${(end - start).toFixed(3)}ms`);
+}
+
+checkV8Optimization();
+</textarea>
+
+      <div class="playground-controls">
+        <button class="btn-action btn-primary" id="runCodeBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span>Run Code (⌘+Enter)</span>
+        </button>
+
+        <button class="btn-action btn-outline" id="clearConsoleBtn">
+          <span>Clear Console</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="playground-console">
+      <div class="console-title">Execution Console Output</div>
+      <div id="consoleOutputArea">
+        <div class="console-line">> Playground ready. Click 'Run Code' to execute.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Instant Search Modal -->
+  <div class="modal-overlay" id="searchModalOverlay">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-cyan);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-modal-input" id="globalSearchInput" placeholder="Search across 182 days, 1,400+ questions, loopholes..." autofocus>
+        <button class="btn-code-action" id="closeSearchModalBtn" style="font-size: 1.1rem;">✕</button>
+      </div>
+      <div class="search-results-list" id="searchResultsList">
+        <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.88rem;">
+          Type to search concepts (e.g. <code>Event Loop</code>, <code>Kafka</code>, <code>Index</code>, <code>Double Spend</code>, <code>RSC</code>)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local JS Dependencies -->
+  <script src="assets/marked.min.js"></script>
+  <script src="assets/highlight.min.js"></script>
+  <script src="data/lms-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

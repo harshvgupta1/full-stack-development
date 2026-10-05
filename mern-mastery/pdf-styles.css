@@ -1,0 +1,284 @@
+@page {
+  size: A4 portrait;
+  margin: 24mm 16mm 20mm 16mm;
+}
+
+html {
+  background: #f4efe6;
+}
+
+body {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.62;
+  color: #1c1915;
+  max-width: 100%;
+  background: #f4efe6;
+}
+
+/* —— Chapter plate —— */
+h1 {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 23pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #f6edd8;
+  background: #1b2438;
+  border: none;
+  border-bottom: 6px solid #c45c26;
+  padding: 22px 22px 18px;
+  margin: 0 0 22px;
+  border-radius: 0 0 14px 14px;
+  page-break-before: always;
+  page-break-after: avoid;
+}
+
+h1:first-of-type {
+  page-break-before: avoid;
+}
+
+h1::after {
+  content: "MERN MASTERY  ·  1 CR PRODUCT PREP  ·  HARSH VARDHAN GUPTA";
+  display: block;
+  margin-top: 12px;
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #e0b86a;
+}
+
+h2 {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15.5pt;
+  font-weight: 700;
+  color: #1b2438;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding: 6px 0 8px 14px;
+  border: none;
+  border-left: 5px solid #c45c26;
+  background: linear-gradient(90deg, #efe2cc 0%, transparent 78%);
+  page-break-after: avoid;
+}
+
+h3 {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 12.5pt;
+  font-weight: 650;
+  color: #1b2438;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  background: #fffdf8;
+  border-left: 4px solid #0f766e;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 1px 0 #e8dcc8;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 11pt;
+  font-weight: 650;
+  color: #7c2d12;
+  margin-top: 14px;
+}
+
+p {
+  margin: 0.55em 0;
+}
+
+strong {
+  color: #1b2438;
+}
+
+/* —— Code —— */
+code {
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 9.2pt;
+  background: #efe6d6;
+  color: #7c2d12;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+pre {
+  background: #151c2b;
+  color: #e7e0d2;
+  padding: 14px 16px 14px 18px;
+  border-radius: 8px;
+  border-left: 5px solid #e0b86a;
+  overflow-x: auto;
+  font-size: 8.8pt;
+  line-height: 1.48;
+  page-break-inside: avoid;
+}
+
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+/* —— Tables —— */
+table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 9.4pt;
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #fffdf8;
+  page-break-inside: avoid;
+}
+
+th,
+td {
+  border: 1px solid #d9cbb3;
+  padding: 7px 8px;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: #1b2438;
+  color: #f6edd8;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+tr:nth-child(even) td {
+  background: #f3eadc;
+}
+
+/* —— Callouts / banners —— */
+blockquote {
+  border: none;
+  border-left: 5px solid #c9a227;
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: #fff6d6;
+  color: #3f2e0c;
+  border-radius: 0 10px 10px 0;
+  page-break-inside: avoid;
+}
+
+blockquote p {
+  margin: 0.35em 0;
+}
+
+blockquote strong {
+  color: #7c2d12;
+}
+
+.schedule-banner {
+  background: #1b2438;
+  color: #f6edd8;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-bottom: 4px solid #c45c26;
+  margin: 0 0 20px;
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+.schedule-banner blockquote {
+  background: transparent;
+  border: none;
+  color: #f6edd8;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule-banner strong {
+  color: #e0b86a;
+}
+
+ul,
+ol {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+li::marker {
+  color: #c45c26;
+}
+
+hr {
+  border: none;
+  height: 0;
+  border-top: 1px solid #d9cbb3;
+  margin: 26px 0;
+  position: relative;
+}
+
+a {
+  color: #9a3412;
+  text-decoration: none;
+  border-bottom: 1px dotted #c45c26;
+}
+
+/* —— Utility boxes (if used) —— */
+.cover-title {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 28pt;
+  text-align: center;
+  margin-top: 80px;
+  color: #1b2438;
+}
+
+.cover-subtitle {
+  font-size: 13pt;
+  text-align: center;
+  color: #6b5b4a;
+  margin-top: 10px;
+}
+
+.box-note,
+.box-practice,
+.box-interview {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  page-break-inside: avoid;
+}
+
+.box-note {
+  background: #fff6d6;
+  border-left: 5px solid #c9a227;
+}
+
+.box-practice {
+  background: #dcf5ee;
+  border-left: 5px solid #0f766e;
+}
+
+.box-interview {
+  background: #fde8dc;
+  border-left: 5px solid #c45c26;
+}
+
+/* Interview Q&A rhythm */
+h3 + p {
+  background: #fffdf8;
+  padding: 8px 12px 10px;
+  margin-top: 0;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #eadfcb;
+  border-top: none;
+}
+
+h4 + table,
+p strong + table {
+  font-size: 9.2pt;
+}

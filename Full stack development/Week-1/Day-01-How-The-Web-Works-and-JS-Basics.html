@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Day 1 | How The Web Works + JavaScript Basics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8B83FF;
+            --primary-dark: #4A42D4;
+            --accent: #FF6B6B;
+            --accent-green: #2ECC71;
+            --accent-orange: #F39C12;
+            --accent-blue: #3498DB;
+            --bg: #FFFFFF;
+            --bg-code: #1E1E2E;
+            --bg-section: #F8F9FE;
+            --bg-tip: #E8F5E9;
+            --bg-warning: #FFF3E0;
+            --bg-danger: #FFEBEE;
+            --bg-info: #E3F2FD;
+            --text: #1A1A2E;
+            --text-light: #555;
+            --text-muted: #888;
+            --border: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 14px;
+            background: var(--bg);
+            padding: 0;
+        }
+
+        /* Print / PDF Styles */
+        @media print {
+            body { padding: 0; font-size: 11pt; }
+            .page-break { page-break-before: always; }
+            .no-print { display: none; }
+            .cover-page { page-break-after: always; }
+            pre { white-space: pre-wrap !important; word-wrap: break-word !important; }
+            .callout { break-inside: avoid; }
+            h2 { page-break-before: always; }
+            h2:first-of-type { page-break-before: avoid; }
+        }
+
+        @page {
+            size: A4;
+            margin: 1.5cm 2cm;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.15) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .cover-page::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(108, 99, 255, 0.2);
+            border: 1px solid rgba(108, 99, 255, 0.4);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--primary-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title span {
+            background: linear-gradient(135deg, #6C63FF, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 22px;
+            font-weight: 400;
+            color: #a0a0c0;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #c0c0d0;
+        }
+
+        .cover-meta-item .icon {
+            font-size: 18px;
+        }
+
+        .cover-goal {
+            margin-top: 50px;
+            padding: 24px 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            max-width: 700px;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-goal h3 {
+            color: var(--accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .cover-goal p {
+            color: #d0d0e0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Content Container */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 40px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-section);
+            padding: 32px 36px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .toc h2 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+            page-break-before: avoid;
+        }
+
+        .toc ol {
+            padding-left: 24px;
+        }
+
+        .toc li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .toc li strong {
+            color: var(--text);
+        }
+
+        /* Headings */
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin: 48px 0 8px 0;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text);
+            margin: 40px 0 16px 0;
+            padding: 12px 0 8px 0;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 28px 0 12px 0;
+        }
+
+        h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 20px 0 8px 0;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: var(--text-light);
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid;
+            font-size: 13.5px;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .callout-important {
+            background: var(--bg-warning);
+            border-color: var(--accent-orange);
+        }
+        .callout-important .callout-title { color: #E67E22; }
+
+        .callout-tip {
+            background: var(--bg-tip);
+            border-color: var(--accent-green);
+        }
+        .callout-tip .callout-title { color: #27AE60; }
+
+        .callout-danger {
+            background: var(--bg-danger);
+            border-color: var(--accent);
+        }
+        .callout-danger .callout-title { color: #E74C3C; }
+
+        .callout-info {
+            background: var(--bg-info);
+            border-color: var(--accent-blue);
+        }
+        .callout-info .callout-title { color: #2980B9; }
+
+        .callout-interview {
+            background: linear-gradient(135deg, #F3E5F5, #EDE7F6);
+            border-color: var(--primary);
+        }
+        .callout-interview .callout-title { color: var(--primary-dark); }
+
+        /* Code Blocks */
+        pre {
+            background: var(--bg-code);
+            color: #CDD6F4;
+            padding: 20px 24px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 14px 0 18px 0;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 12.5px;
+            line-height: 1.7;
+            border: 1px solid #313244;
+            position: relative;
+        }
+
+        pre .lang-label {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 10px;
+            color: #6C7086;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 12.5px;
+        }
+
+        p code, li code, td code {
+            background: #F0EFFF;
+            color: var(--primary-dark);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 12.5px;
+            border: 1px solid #E0DEFF;
+        }
+
+        /* Syntax Highlighting */
+        .keyword { color: #CBA6F7; }
+        .string { color: #A6E3A1; }
+        .number { color: #FAB387; }
+        .comment { color: #6C7086; font-style: italic; }
+        .function { color: #89B4FA; }
+        .variable { color: #CDD6F4; }
+        .operator { color: #89DCEB; }
+        .boolean { color: #FAB387; }
+        .property { color: #F5C2E7; }
+        .builtin { color: #F9E2AF; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px 0;
+            font-size: 13px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th {
+            padding: 10px 14px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-section);
+        }
+
+        tbody tr:hover {
+            background: #F0EFFF;
+        }
+
+        /* Diagrams / ASCII Art */
+        .diagram {
+            background: #FAFBFF;
+            border: 2px dashed #D0D0E0;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+
+        .diagram pre {
+            background: transparent;
+            color: var(--text);
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 24px;
+            margin: 10px 0 16px 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        li strong {
+            color: var(--text);
+        }
+
+        /* Analogy Box */
+        .analogy {
+            background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
+            border: 1px solid #FFE082;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 16px 0;
+        }
+
+        .analogy-title {
+            font-weight: 700;
+            color: #F57F17;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        /* Interview Answer Box */
+        .interview-answer {
+            background: linear-gradient(135deg, #EDE7F6, #F3E5F5);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 16px 22px;
+            margin: 14px 0;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+
+        .interview-answer::before {
+            content: '💬 Interview Answer:';
+            display: block;
+            font-style: normal;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            text-align: center;
+            margin: 48px 0 32px 0;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .section-divider span {
+            background: white;
+            padding: 0 20px;
+            position: relative;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Comparison Box */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .comparison-box {
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-box.good {
+            background: #E8F5E9;
+            border-color: #A5D6A7;
+        }
+
+        .comparison-box.bad {
+            background: #FFEBEE;
+            border-color: #EF9A9A;
+        }
+
+        .comparison-box h4 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 60px;
+            padding: 24px;
+            background: var(--bg-section);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .page-footer p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        /* Cheat Sheet Grid */
+        .cheat-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .cheat-item {
+            background: var(--bg-section);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .cheat-item .q {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .cheat-item .a {
+            color: var(--text-light);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* Best practice rule */
+        .best-practice {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .best-practice h4 {
+            color: #A6E3A1;
+            margin: 0 0 10px 0;
+        }
+
+        .best-practice p {
+            color: #CDD6F4;
+            margin-bottom: 4px;
+        }
+
+        .best-practice code {
+            background: rgba(108, 99, 255, 0.3);
+            color: #CBA6F7;
+            border: none;
+        }
+
+        /* Print button */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 14px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(108, 99, 255, 0.5);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 14px 0;
+            border: 1px solid #9FA8DA;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Print / Save as PDF Button -->
+<button class="print-btn no-print" onclick="window.print()">📄 Save as PDF</button>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+    <div class="cover-badge">MERN &amp; MEAN Stack Mastery</div>
+    <h1 class="cover-title">
+        Week 1 — Day 1<br>
+        <span>How The Web Works</span><br>
+        + JavaScript Basics
+    </h1>
+    <p class="cover-subtitle">From Zero to Product-Ready Full Stack Developer</p>
+    <div class="cover-meta">
+        <div class="cover-meta-item">
+            <span class="icon">📅</span>
+            <span>September 19, 2026</span>
+        </div>
+        <div class="cover-meta-item">
+            <span class="icon">⏱️</span>
+            <span>2 Hours</span>
+        </div>
+        <div class="cover-meta-item">
+            <span class="icon">📖</span>
+            <span>Day 1 of 56</span>
+        </div>
+    </div>
+    <div class="cover-goal">
+        <h3>🎯 Today's Goal</h3>
+        <p>After today, you should be able to explain to an interviewer exactly how a webpage loads when you type a URL, what JavaScript is, where it runs, and how variables &amp; data types work at a deep, under-the-hood level.</p>
+    </div>
+</div>
+
+<!-- ==================== CONTENT ==================== -->
+<div class="content">
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2 style="border: none; margin: 0 0 16px 0; padding: 0;">📑 Table of Contents</h2>
+        <ol>
+            <li><strong>How the Internet Works</strong> — DNS, TCP, HTTP/HTTPS, Request-Response Cycle</li>
+            <li><strong>Client-Server Architecture</strong> — Frontend vs Backend</li>
+            <li><strong>What is a Browser &amp; How It Renders a Page</strong> — DOM, CSSOM, Critical Rendering Path</li>
+            <li><strong>What is JavaScript?</strong> — History, Engines, Single-Threaded Nature</li>
+            <li><strong>Setting Up Your Dev Environment</strong> — VS Code, Node.js, Git</li>
+            <li><strong>Variables: var, let, const</strong> — Hoisting, TDZ, Scope, Memory</li>
+            <li><strong>Data Types</strong> — All 8 Types, Value vs Reference, Stack vs Heap</li>
+            <li><strong>typeof Operator</strong> — All Cases Including Quirks</li>
+            <li><strong>Type Coercion &amp; Conversion</strong> — == vs ===, Implicit vs Explicit, Tricky Questions</li>
+            <li><strong>Practice Problems</strong> — 4 Problem Sets</li>
+            <li><strong>Interview Cheat Sheet</strong> — 10 Must-Know Questions &amp; Answers</li>
+        </ol>
+    </div>
+
+    <!-- ==================== PART 1 ==================== -->
+    <div class="section-divider"><span>Part 1</span></div>
+
+    <h1>1. How the Internet Works</h1>
+    <p><em>Theory — 20 minutes</em></p>
+
+    <h2><span class="section-num">1.1</span> What is the Internet?</h2>
+
+    <p><strong>Simple Answer:</strong> The internet is a giant network of computers connected to each other across the world, sharing information.</p>
+
+    <div class="interview-answer">
+        The internet is a global network of interconnected computers that communicate using standardized protocols (primarily TCP/IP). It's a physical infrastructure of cables (undersea fiber optic cables, copper wires), routers, switches, and servers that enables data transfer between any two connected devices.
+    </div>
+
+    <div class="analogy">
+        <div class="analogy-title">🏪 Real-World Analogy — The Postal System</div>
+        <ul>
+            <li><strong>Your computer</strong> = Your house</li>
+            <li><strong>Server</strong> = A warehouse/shop</li>
+            <li><strong>IP Address</strong> = Your home address (e.g., 192.168.1.1)</li>
+            <li><strong>Domain Name</strong> (google.com) = The shop's name (easier to remember)</li>
+            <li><strong>DNS</strong> = The phone directory that converts names to addresses</li>
+            <li><strong>HTTP</strong> = The language both sides agree to speak</li>
+            <li><strong>Router</strong> = The post office that routes your mail</li>
+        </ul>
+    </div>
+
+    <div class="diagram">
+        <pre>YOUR COMPUTER  ←→  ROUTER  ←→  ISP  ←→  INTERNET BACKBONE  ←→  SERVER
+   (Home)      (Post Office)  (Postal Service)    (Highway)       (Warehouse)</pre>
+    </div>
+
+    <!-- ==================== URL Journey ==================== -->
+    <h2><span class="section-num">1.2</span> What Happens When You Type "google.com"?</h2>
+
+    <div class="callout callout-important">
+        <div class="callout-title">⚠️ IMPORTANT</div>
+        This is one of the <strong>MOST asked interview questions</strong>. You must know every step. Practice explaining this out loud.
+    </div>
+
+    <h3>Step 1: DNS Resolution (Finding the Address)</h3>
+    <pre><span class="comment">You type: google.com</span>
+<span class="comment">Browser thinks: "I need the IP address of google.com"</span></pre>
+
+    <p><strong>DNS (Domain Name System)</strong> converts human-readable domain names to IP addresses.</p>
+
+    <h4>DNS Lookup Process (in order):</h4>
+    <ol>
+        <li><strong>Browser Cache</strong> — "Have I visited this site recently?"</li>
+        <li><strong>OS Cache</strong> — "Does my operating system know?" (checks <code>/etc/hosts</code>)</li>
+        <li><strong>Router Cache</strong> — "Does my router know?"</li>
+        <li><strong>ISP's DNS Server</strong> — "Ask my internet provider"</li>
+        <li><strong>Root DNS Server</strong> — "I know who manages .com domains"</li>
+        <li><strong>TLD Server</strong> — "I manage all .com domains. google.com → Google's nameserver"</li>
+        <li><strong>Authoritative DNS Server</strong> — "google.com lives at IP 142.250.190.78"</li>
+    </ol>
+
+    <div class="diagram">
+        <pre>Your Browser
+    │
+    ▼
+Browser Cache (miss) → OS Cache (miss) → Router Cache (miss)
+    │
+    ▼
+ISP DNS Server (miss)
+    │
+    ▼
+Root DNS Server ──→ ".com TLD Server" ──→ Google's DNS Server
+                                              │
+                                              ▼
+                                        IP: 142.250.190.78</pre>
+    </div>
+
+    <h3>Step 2: TCP Connection (The Three-Way Handshake)</h3>
+    <p>Before sending data, the browser establishes a reliable connection:</p>
+
+    <div class="diagram">
+        <pre>Client (Browser)                    Server (Google)
+      │                                  │
+      │──── SYN (Hey, can we talk?) ────→│
+      │                                  │
+      │←── SYN-ACK (Sure, let's!) ──────│
+      │                                  │
+      │──── ACK (Great, we're on!) ─────→│
+      │                                  │
+      │       CONNECTION ESTABLISHED      │</pre>
+    </div>
+
+    <ul>
+        <li><strong>SYN</strong> = Synchronize — Client says "I want to connect"</li>
+        <li><strong>SYN-ACK</strong> = Synchronize-Acknowledge — Server says "OK, I'm ready too"</li>
+        <li><strong>ACK</strong> = Acknowledge — Client says "Let's go!"</li>
+    </ul>
+
+    <div class="analogy">
+        <div class="analogy-title">📞 Analogy — A Phone Call</div>
+        <p>1. You dial (SYN) → 2. They pick up and say "Hello?" (SYN-ACK) → 3. You say "Hi! I need something" (ACK)</p>
+    </div>
+
+    <h3>Step 3: TLS/SSL Handshake (for HTTPS)</h3>
+    <p>If the URL starts with <code>https://</code>, an additional security layer is added:</p>
+
+    <div class="diagram">
+        <pre>Client                                  Server
+  │                                        │
+  │── "I support these encryption         │
+  │    methods" ──────────────────────────→│
+  │                                        │
+  │←── "Let's use this method.            │
+  │     Here's my SSL certificate" ───────│
+  │                                        │
+  │── (Verifies certificate with CA)       │
+  │                                        │
+  │── "Here's a shared secret key         │
+  │    encrypted with your public         │
+  │    key" ──────────────────────────────→│
+  │                                        │
+  │        ENCRYPTED CONNECTION            │</pre>
+    </div>
+
+    <h4>HTTP vs HTTPS Comparison</h4>
+    <table>
+        <thead>
+            <tr><th>Feature</th><th>HTTP</th><th>HTTPS</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Full Form</strong></td><td>HyperText Transfer Protocol</td><td>HTTP Secure</td></tr>
+            <tr><td><strong>Port</strong></td><td>80</td><td>443</td></tr>
+            <tr><td><strong>Encryption</strong></td><td>❌ None</td><td>✅ TLS/SSL</td></tr>
+            <tr><td><strong>Data Visibility</strong></td><td>Anyone can read</td><td>Encrypted</td></tr>
+            <tr><td><strong>SEO</strong></td><td>Lower ranking</td><td>Higher ranking</td></tr>
+            <tr><td><strong>Use Case</strong></td><td>Never use this</td><td>Always use this</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Step 4: HTTP Request</h3>
+    <p>The browser sends an HTTP request to the server:</p>
+
+    <pre><span class="keyword">GET</span> / <span class="string">HTTP/1.1</span>
+<span class="property">Host:</span> google.com
+<span class="property">User-Agent:</span> Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
+<span class="property">Accept:</span> text/html,application/xhtml+xml
+<span class="property">Accept-Language:</span> en-US,en;q=0.9
+<span class="property">Accept-Encoding:</span> gzip, deflate, br
+<span class="property">Connection:</span> keep-alive
+<span class="property">Cookie:</span> session_id=abc123</pre>
+
+    <ul>
+        <li><strong>GET</strong> = HTTP Method (what action you want)</li>
+        <li><strong>/</strong> = Path (which page — <code>/</code> means homepage)</li>
+        <li><strong>HTTP/1.1</strong> = Protocol version</li>
+        <li><strong>Headers</strong> = Extra info (like a cover letter with your request)</li>
+    </ul>
+
+    <h4>HTTP Methods (CRUD Operations)</h4>
+    <table>
+        <thead>
+            <tr><th>Method</th><th>Action</th><th>Example</th><th>CRUD</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>GET</code></td><td>Read / Retrieve</td><td>Get a blog post</td><td>READ</td></tr>
+            <tr><td><code>POST</code></td><td>Create new</td><td>Submit a form</td><td>CREATE</td></tr>
+            <tr><td><code>PUT</code></td><td>Update entire resource</td><td>Update full profile</td><td>UPDATE</td></tr>
+            <tr><td><code>PATCH</code></td><td>Update partial resource</td><td>Update just email</td><td>UPDATE</td></tr>
+            <tr><td><code>DELETE</code></td><td>Remove</td><td>Delete a comment</td><td>DELETE</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Step 5: Server Processes Request</h3>
+    <div class="diagram">
+        <pre>Incoming Request
+     │
+     ▼
+Web Server (Nginx/Apache)     ← Handles static files, load balancing
+     │
+     ▼
+Application Server (Node.js)  ← Runs your code, business logic
+     │
+     ▼
+Database (MongoDB/PostgreSQL)  ← Stores and retrieves data
+     │
+     ▼
+Response prepared</pre>
+    </div>
+
+    <h3>Step 6: HTTP Response</h3>
+    <pre><span class="keyword">HTTP/1.1</span> <span class="number">200</span> <span class="string">OK</span>
+<span class="property">Content-Type:</span> text/html; charset=UTF-8
+<span class="property">Content-Length:</span> 12345
+<span class="property">Cache-Control:</span> max-age=3600
+
+<span class="comment">&lt;!DOCTYPE html&gt;</span>
+<span class="comment">&lt;html&gt;...&lt;/html&gt;</span></pre>
+
+    <h4>HTTP Status Codes (MUST KNOW for Interviews)</h4>
+    <table>
+        <thead>
+            <tr><th>Code</th><th>Category</th><th>Examples</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>1xx</strong></td><td>Informational</td><td>100 Continue</td></tr>
+            <tr><td><strong>2xx</strong></td><td>Success ✅</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+            <tr><td><strong>3xx</strong></td><td>Redirection ↪️</td><td>301 Moved Permanently, 302 Found, 304 Not Modified</td></tr>
+            <tr><td><strong>4xx</strong></td><td>Client Error ❌</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 429 Too Many Requests</td></tr>
+            <tr><td><strong>5xx</strong></td><td>Server Error 💥</td><td>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+        <div class="callout-title">💡 Interview Tip</div>
+        Know at least these codes: <code>200</code>, <code>201</code>, <code>204</code>, <code>301</code>, <code>302</code>, <code>400</code>, <code>401</code>, <code>403</code>, <code>404</code>, <code>409</code>, <code>429</code>, <code>500</code>, <code>502</code>, <code>503</code>
+    </div>
+
+    <!-- ==================== Client-Server ==================== -->
+    <h2><span class="section-num">1.3</span> Client-Server Architecture</h2>
+
+    <div class="diagram">
+        <pre>┌─────────────────┐              ┌─────────────────┐
+│     CLIENT      │   Request    │     SERVER      │
+│  (Your Browser) │ ───────────→ │  (Backend App)  │
+│                 │              │                 │
+│  - HTML/CSS/JS  │   Response   │  - Node.js      │
+│  - React/Angular│ ←─────────── │  - Express      │
+│  - User sees    │              │  - Database     │
+│    this part    │              │  - Business     │
+│                 │              │    Logic        │
+└─────────────────┘              └─────────────────┘
+     FRONTEND                        BACKEND</pre>
+    </div>
+
+    <div class="comparison">
+        <div class="comparison-box good">
+            <h4>🖥️ Frontend (Client Side)</h4>
+            <ul>
+                <li>What the user sees and interacts with</li>
+                <li>HTML (structure), CSS (styling), JS (behavior)</li>
+                <li>Runs in the browser</li>
+                <li>React, Angular, Vue</li>
+            </ul>
+        </div>
+        <div class="comparison-box" style="background: #E3F2FD; border-color: #90CAF9;">
+            <h4>⚙️ Backend (Server Side)</h4>
+            <ul>
+                <li>Logic behind the scenes</li>
+                <li>Data storage, auth, business rules</li>
+                <li>Node.js, Express, Django, Spring</li>
+                <li>User never sees this code</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== PART 2 ==================== -->
+    <div class="section-divider page-break"><span>Part 2</span></div>
+
+    <h1>2. What is a Browser &amp; How It Renders a Page</h1>
+
+    <h2><span class="section-num">2.1</span> Browser Engines</h2>
+
+    <table>
+        <thead>
+            <tr><th>Browser</th><th>Rendering Engine</th><th>JS Engine</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Chrome</td><td>Blink</td><td><strong>V8</strong></td></tr>
+            <tr><td>Firefox</td><td>Gecko</td><td>SpiderMonkey</td></tr>
+            <tr><td>Safari</td><td>WebKit</td><td>JavaScriptCore</td></tr>
+            <tr><td>Edge</td><td>Blink</td><td><strong>V8</strong></td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-info">
+        <div class="callout-title">💡 Why V8 Matters</div>
+        Node.js uses the <strong>V8 engine</strong> to run JavaScript outside the browser. The same engine that runs JS in Chrome also powers your backend!
+    </div>
+
+    <h2><span class="section-num">2.2</span> Browser Rendering Pipeline (Critical Rendering Path)</h2>
+
+    <div class="callout callout-important">
+        <div class="callout-title">⚠️ IMPORTANT</div>
+        Understanding this pipeline helps you write performant web apps. Interviewers ask "why is my page slow?" — this is the answer.
+    </div>
+
+    <div class="diagram">
+        <pre>HTML ──→ DOM Tree
+              │
+              ├──→ Render Tree ──→ Layout ──→ Paint ──→ Composite ──→ PIXELS ON SCREEN
+              │
+CSS  ──→ CSSOM Tree</pre>
+    </div>
+
+    <h3>Step-by-Step Breakdown:</h3>
+
+    <h4>1. Parse HTML → Build DOM (Document Object Model)</h4>
+    <pre><span class="comment">&lt;html&gt;</span>
+  <span class="comment">&lt;body&gt;</span>
+    <span class="comment">&lt;h1&gt;</span>Hello<span class="comment">&lt;/h1&gt;</span>
+    <span class="comment">&lt;p&gt;</span>World<span class="comment">&lt;/p&gt;</span>
+  <span class="comment">&lt;/body&gt;</span>
+<span class="comment">&lt;/html&gt;</span></pre>
+
+    <p>Becomes a tree:</p>
+    <div class="diagram">
+        <pre>           Document
+              │
+            &lt;html&gt;
+              │
+            &lt;body&gt;
+           /      \
+        &lt;h1&gt;      &lt;p&gt;
+         │          │
+       "Hello"   "World"</pre>
+    </div>
+
+    <h4>2. Parse CSS → Build CSSOM</h4>
+    <p>CSS rules become a tree of computed styles mapped to DOM elements.</p>
+
+    <h4>3. Combine DOM + CSSOM → Render Tree</h4>
+    <ul>
+        <li>Only includes <strong>visible</strong> elements</li>
+        <li><code>display: none</code> — <strong>excluded</strong> from render tree</li>
+        <li><code>visibility: hidden</code> — <strong>included</strong> (takes up space)</li>
+    </ul>
+
+    <h4>4. Layout (Reflow)</h4>
+    <p>Calculates exact position and size of each element on screen.</p>
+
+    <h4>5. Paint</h4>
+    <p>Fills in pixels — colors, text, borders, shadows, images.</p>
+
+    <h4>6. Composite</h4>
+    <p>Layers are combined in correct order (z-index). GPU acceleration for transforms and opacity.</p>
+
+    <h3>Where Does JavaScript Fit?</h3>
+    <div class="diagram">
+        <pre>HTML Parsing ──→ Encounters &lt;script&gt; ──→ STOP PARSING ──→ Download JS ──→ Execute JS ──→ Resume</pre>
+    </div>
+
+    <p><strong>This is why:</strong></p>
+    <ul>
+        <li><code>&lt;script&gt;</code> tags <strong>block</strong> HTML parsing (render-blocking!)</li>
+        <li>Put <code>&lt;script&gt;</code> at the <strong>bottom</strong> of <code>&lt;body&gt;</code>, OR use <code>defer</code>/<code>async</code></li>
+    </ul>
+
+    <div class="diagram">
+        <pre><strong>Without defer/async:</strong>
+HTML: ████████░░░░░░████████████
+JS:          ████████
+             ↑ blocks HTML
+
+<strong>With defer:</strong>
+HTML: ██████████████████████████
+JS:          ████████░░░░░░████
+                              ↑ executes after HTML done
+
+<strong>With async:</strong>
+HTML: ████████░░░████████████████
+JS:          ████████
+             ↑ executes when ready (may interrupt)</pre>
+    </div>
+
+    <!-- ==================== PART 3 ==================== -->
+    <div class="section-divider page-break"><span>Part 3</span></div>
+
+    <h1>3. What is JavaScript?</h1>
+
+    <h2><span class="section-num">3.1</span> The Story</h2>
+    <ul>
+        <li><strong>Created in 1995</strong> by Brendan Eich at Netscape in just <strong>10 days</strong></li>
+        <li>Originally called "Mocha" → "LiveScript" → "JavaScript" (marketing name)</li>
+        <li><strong>JavaScript has NOTHING to do with Java</strong></li>
+        <li>Standardized as <strong>ECMAScript</strong> (ES):
+            <ul>
+                <li>ES5 (2009) — the "old" JavaScript</li>
+                <li><strong>ES6/ES2015</strong> — the HUGE update (classes, arrow functions, let/const, promises)</li>
+                <li>ES2016 → ES2024 — yearly updates</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2><span class="section-num">3.2</span> Where Does JavaScript Run?</h2>
+
+    <div class="diagram">
+        <pre>┌──────────────────────────────────────────────────┐
+│                  JAVASCRIPT                       │
+│                                                   │
+│  ┌──────────────────┐  ┌───────────────────────┐  │
+│  │    BROWSER        │  │      NODE.JS          │  │
+│  │                   │  │                       │  │
+│  │  ✅ DOM           │  │  ✅ File System       │  │
+│  │  ✅ Window        │  │  ✅ HTTP Server       │  │
+│  │  ✅ Document      │  │  ✅ OS Access         │  │
+│  │  ✅ localStorage  │  │  ✅ npm packages      │  │
+│  │  ✅ fetch/XHR     │  │  ✅ Databases         │  │
+│  │  ❌ File System   │  │  ❌ DOM               │  │
+│  │  ❌ OS Access     │  │  ❌ Window            │  │
+│  └──────────────────┘  └───────────────────────┘  │
+│                                                   │
+│  Shared: console, setTimeout, JSON, Promise,      │
+│  Math, Array, Object, String...                   │
+└──────────────────────────────────────────────────┘</pre>
+    </div>
+
+    <h2><span class="section-num">3.3</span> JavaScript Engine Internals</h2>
+
+    <div class="diagram">
+        <pre>Source Code (your .js file)
+       │
+       ▼
+   ┌────────┐
+   │ Parser │ ← Reads code, checks syntax errors
+   └────────┘
+       │
+       ▼
+   ┌────────────────┐
+   │ AST (Abstract  │ ← Tree representation of code
+   │ Syntax Tree)   │
+   └────────────────┘
+       │
+       ▼
+   ┌─────────────┐
+   │ Interpreter │ ← Bytecode (fast startup)
+   │ (Ignition)  │
+   └─────────────┘
+       │
+       ▼
+   ┌──────────────────┐
+   │ Optimizing       │ ← Hot code → machine code
+   │ Compiler         │    (JIT compilation)
+   │ (TurboFan in V8) │
+   └──────────────────┘
+       │
+       ▼
+   Machine Code (runs on CPU)</pre>
+    </div>
+
+    <div class="callout callout-info">
+        <div class="callout-title">💡 Key Point</div>
+        JavaScript is <strong>interpreted + JIT compiled</strong>. It starts interpreting immediately (fast startup), then optimizes frequently-run code by compiling it (fast execution).
+    </div>
+
+    <h2><span class="section-num">3.4</span> Single-Threaded Nature</h2>
+    <ul>
+        <li>JavaScript has only <strong>ONE call stack</strong></li>
+        <li>It can do only <strong>ONE thing at a time</strong></li>
+        <li>Async operations handled via the <strong>Event Loop</strong> (covered deeply on Saturday!)</li>
+    </ul>
+
+    <!-- ==================== PART 4 ==================== -->
+    <div class="section-divider page-break"><span>Part 4</span></div>
+
+    <h1>4. Setting Up Your Dev Environment</h1>
+
+    <h2><span class="section-num">4.1</span> Install These Tools</h2>
+
+    <h3>1. VS Code (Code Editor)</h3>
+    <p>Download from: <strong>https://code.visualstudio.com/</strong></p>
+    <p><strong>Essential Extensions:</strong></p>
+    <ul>
+        <li>ESLint — code quality</li>
+        <li>Prettier — code formatting</li>
+        <li>JavaScript (ES6) code snippets</li>
+        <li>Auto Rename Tag</li>
+        <li>Material Icon Theme</li>
+        <li>Live Server</li>
+    </ul>
+
+    <h3>2. Node.js (JavaScript Runtime)</h3>
+    <p>Download <strong>LTS version</strong> from: <strong>https://nodejs.org/</strong></p>
+    <pre><span class="comment"># Verify installation:</span>
+node <span class="operator">--</span>version    <span class="comment"># Should show v18.x.x or v20.x.x</span>
+npm <span class="operator">--</span>version     <span class="comment"># Should show 9.x.x or 10.x.x</span></pre>
+
+    <h3>3. Git (Version Control)</h3>
+    <p>Download from: <strong>https://git-scm.com/</strong></p>
+    <pre><span class="comment"># Verify and configure:</span>
+git <span class="operator">--</span>version
+git config <span class="operator">--</span>global user.name <span class="string">"Your Name"</span>
+git config <span class="operator">--</span>global user.email <span class="string">"your.email@example.com"</span></pre>
+
+    <h2><span class="section-num">4.2</span> Your First JavaScript File</h2>
+
+    <pre><span class="comment"># Create a project folder:</span>
+mkdir <span class="operator">~</span>/Desktop/js-learning
+cd <span class="operator">~</span>/Desktop/js-learning
+touch day01.js
+code .          <span class="comment"># Opens VS Code</span></pre>
+
+    <p>In <code>day01.js</code>:</p>
+    <pre>console.<span class="function">log</span>(<span class="string">"Hello, World! I'm learning JavaScript! 🚀"</span>);</pre>
+
+    <p>Run it:</p>
+    <pre>node day01.js
+<span class="comment"># Output: Hello, World! I'm learning JavaScript! 🚀</span></pre>
+
+    <!-- ==================== PART 5 ==================== -->
+    <div class="section-divider page-break"><span>Part 5</span></div>
+
+    <h1>5. Variables — <code>var</code>, <code>let</code>, <code>const</code></h1>
+    <p><em>This is where real JavaScript begins — 25 minutes</em></p>
+
+    <h2><span class="section-num">5.1</span> What is a Variable?</h2>
+    <p>A variable is a <strong>named container</strong> that stores a value in memory.</p>
+
+    <div class="analogy">
+        <div class="analogy-title">📦 Analogy — Labeled Boxes</div>
+        <ul>
+            <li>The <strong>label</strong> = variable name</li>
+            <li>What's <strong>inside</strong> = the value</li>
+            <li>The <strong>box type</strong> = <code>var</code>, <code>let</code>, or <code>const</code></li>
+        </ul>
+    </div>
+
+    <h2><span class="section-num">5.2</span> Three Ways to Declare</h2>
+    <pre><span class="keyword">var</span> name <span class="operator">=</span> <span class="string">"Rahul"</span>;        <span class="comment">// OLD way (ES5) — avoid this</span>
+<span class="keyword">let</span> age <span class="operator">=</span> <span class="number">25</span>;              <span class="comment">// NEW way (ES6) — values that change</span>
+<span class="keyword">const</span> country <span class="operator">=</span> <span class="string">"India"</span>;   <span class="comment">// NEW way (ES6) — values that DON'T change</span></pre>
+
+    <h2><span class="section-num">5.3</span> <code>var</code> — The Problematic One</h2>
+
+    <h3>Problem 1: Function-scoped (NOT block-scoped)</h3>
+    <pre><span class="keyword">if</span> (<span class="boolean">true</span>) {
+    <span class="keyword">var</span> x <span class="operator">=</span> <span class="number">10</span>;
+}
+console.<span class="function">log</span>(x);  <span class="comment">// 10 ✅ — var LEAKS out of if/for blocks!</span>
+
+<span class="comment">// Compare with let:</span>
+<span class="keyword">if</span> (<span class="boolean">true</span>) {
+    <span class="keyword">let</span> y <span class="operator">=</span> <span class="number">20</span>;
+}
+console.<span class="function">log</span>(y);  <span class="comment">// ❌ ReferenceError: y is not defined</span></pre>
+
+    <div class="highlight-box">
+        <p><strong>What is Scope?</strong></p>
+        <ul>
+            <li><strong>Scope</strong> = Where a variable can be accessed</li>
+            <li><code>var</code> is <strong>function-scoped</strong> — available throughout the entire function</li>
+            <li><code>let</code>/<code>const</code> are <strong>block-scoped</strong> — only available inside <code>{ }</code></li>
+        </ul>
+    </div>
+
+    <pre><span class="keyword">function</span> <span class="function">example</span>() {
+    <span class="keyword">if</span> (<span class="boolean">true</span>) {
+        <span class="keyword">var</span> a <span class="operator">=</span> <span class="number">1</span>;    <span class="comment">// Available in ENTIRE function</span>
+        <span class="keyword">let</span> b <span class="operator">=</span> <span class="number">2</span>;    <span class="comment">// Available only in this if-block</span>
+        <span class="keyword">const</span> c <span class="operator">=</span> <span class="number">3</span>;  <span class="comment">// Available only in this if-block</span>
+    }
+    console.<span class="function">log</span>(a);  <span class="comment">// 1 ✅</span>
+    console.<span class="function">log</span>(b);  <span class="comment">// ❌ ReferenceError</span>
+    console.<span class="function">log</span>(c);  <span class="comment">// ❌ ReferenceError</span>
+}</pre>
+
+    <h3>Problem 2: Hoisting</h3>
+
+    <div class="callout callout-important">
+        <div class="callout-title">⚠️ MUST KNOW FOR INTERVIEWS</div>
+        <strong>Hoisting</strong> is JavaScript's behavior of moving variable and function <strong>declarations</strong> to the top of their scope BEFORE code execution. Only the <strong>declaration</strong> is hoisted, NOT the <strong>initialization</strong>.
+    </div>
+
+    <pre>console.<span class="function">log</span>(greeting);  <span class="comment">// undefined (NOT an error!)</span>
+<span class="keyword">var</span> greeting <span class="operator">=</span> <span class="string">"Hello"</span>;
+console.<span class="function">log</span>(greeting);  <span class="comment">// "Hello"</span></pre>
+
+    <p><strong>What JavaScript actually does behind the scenes:</strong></p>
+    <pre><span class="comment">// CREATION PHASE (before your code runs):</span>
+<span class="keyword">var</span> greeting;           <span class="comment">// Declaration hoisted, initialized with undefined</span>
+
+<span class="comment">// EXECUTION PHASE (your code runs):</span>
+console.<span class="function">log</span>(greeting);  <span class="comment">// undefined</span>
+greeting <span class="operator">=</span> <span class="string">"Hello"</span>;     <span class="comment">// NOW it gets assigned</span>
+console.<span class="function">log</span>(greeting);  <span class="comment">// "Hello"</span></pre>
+
+    <div class="interview-answer">
+        "JavaScript execution happens in two phases. In the <strong>creation phase</strong>, the engine scans the code and allocates memory for all variable and function declarations. <code>var</code> variables are initialized with <code>undefined</code> during this phase. In the <strong>execution phase</strong>, the code runs line by line and assignments happen."
+    </div>
+
+    <h3>Problem 3: The Classic Loop Problem</h3>
+    <pre><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator">&lt;</span> <span class="number">3</span>; i<span class="operator">++</span>) {
+    <span class="function">setTimeout</span>(<span class="keyword">function</span>() {
+        console.<span class="function">log</span>(i);
+    }, <span class="number">1000</span>);
+}
+<span class="comment">// Output: 3, 3, 3 (NOT 0, 1, 2!)</span>
+<span class="comment">// Why? var is function-scoped → only ONE 'i' exists</span>
+<span class="comment">// By the time setTimeout runs, the loop is done and i = 3</span></pre>
+
+    <h2><span class="section-num">5.4</span> <code>let</code> — The Modern Variable</h2>
+
+    <pre><span class="keyword">let</span> age <span class="operator">=</span> <span class="number">25</span>;
+age <span class="operator">=</span> <span class="number">26</span>;           <span class="comment">// ✅ Re-assignment allowed</span>
+<span class="keyword">let</span> age <span class="operator">=</span> <span class="number">30</span>;       <span class="comment">// ❌ SyntaxError: already declared</span></pre>
+
+    <h3>Temporal Dead Zone (TDZ)</h3>
+
+    <div class="callout callout-danger">
+        <div class="callout-title">🚨 TRICKY INTERVIEW POINT</div>
+        <code>let</code> and <code>const</code> <strong>ARE</strong> hoisted, but they're placed in a <strong>Temporal Dead Zone (TDZ)</strong> — you cannot access them before their declaration.
+    </div>
+
+    <pre>console.<span class="function">log</span>(a);  <span class="comment">// undefined (var → hoisted + initialized)</span>
+<span class="keyword">var</span> a <span class="operator">=</span> <span class="number">10</span>;
+
+console.<span class="function">log</span>(b);  <span class="comment">// ❌ ReferenceError: Cannot access 'b' before initialization</span>
+<span class="keyword">let</span> b <span class="operator">=</span> <span class="number">20</span>;      <span class="comment">// b IS hoisted, but in TDZ until this line</span></pre>
+
+    <div class="diagram">
+        <pre>// ──── TDZ for 'name' starts here ────
+// Cannot access 'name' in this zone
+// Even though it's hoisted, it's uninitialized
+console.log(name);  // ❌ ReferenceError
+// ──── TDZ for 'name' ends here ────
+let name = "Rahul"; // Declaration + initialization
+console.log(name);  // ✅ "Rahul"</pre>
+    </div>
+
+    <div class="interview-answer">
+        "Yes, <code>let</code> is hoisted, but unlike <code>var</code>, it's not initialized with <code>undefined</code>. It stays in the Temporal Dead Zone from the start of the block until the declaration is encountered. Accessing it in the TDZ throws a ReferenceError. This makes <code>let</code> safer than <code>var</code> because it prevents accidental use before definition."
+    </div>
+
+    <h3><code>let</code> Fixes the Loop Problem</h3>
+    <pre><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator">&lt;</span> <span class="number">3</span>; i<span class="operator">++</span>) {
+    <span class="function">setTimeout</span>(<span class="keyword">function</span>() {
+        console.<span class="function">log</span>(i);
+    }, <span class="number">1000</span>);
+}
+<span class="comment">// Output: 0, 1, 2 ✅</span>
+<span class="comment">// let creates a NEW 'i' for each iteration (block-scoped)</span></pre>
+
+    <h2><span class="section-num">5.5</span> <code>const</code> — The Constant</h2>
+
+    <pre><span class="keyword">const</span> PI <span class="operator">=</span> <span class="number">3.14159</span>;
+PI <span class="operator">=</span> <span class="number">3.14</span>;          <span class="comment">// ❌ TypeError: Assignment to constant variable</span>
+
+<span class="keyword">const</span> name;         <span class="comment">// ❌ SyntaxError: Missing initializer</span>
+                    <span class="comment">// const MUST be initialized when declared</span></pre>
+
+    <div class="callout callout-danger">
+        <div class="callout-title">🚨 WARNING — const with Objects &amp; Arrays</div>
+        <code>const</code> does <strong>NOT</strong> make the value immutable. It only prevents <strong>re-assignment</strong> of the variable. The contents of objects and arrays CAN still be changed!
+    </div>
+
+    <pre><span class="keyword">const</span> user <span class="operator">=</span> { <span class="property">name</span>: <span class="string">"Rahul"</span>, <span class="property">age</span>: <span class="number">25</span> };
+
+<span class="comment">// ✅ Modifying properties is ALLOWED:</span>
+user.<span class="property">name</span> <span class="operator">=</span> <span class="string">"Amit"</span>;
+user.<span class="property">city</span> <span class="operator">=</span> <span class="string">"Mumbai"</span>;
+console.<span class="function">log</span>(user);  <span class="comment">// { name: "Amit", age: 25, city: "Mumbai" }</span>
+
+<span class="comment">// ❌ Re-assigning is NOT allowed:</span>
+user <span class="operator">=</span> { <span class="property">name</span>: <span class="string">"New"</span> };  <span class="comment">// TypeError!</span>
+
+<span class="comment">// Same with arrays:</span>
+<span class="keyword">const</span> colors <span class="operator">=</span> [<span class="string">"red"</span>, <span class="string">"blue"</span>];
+colors.<span class="function">push</span>(<span class="string">"green"</span>);    <span class="comment">// ✅ Allowed</span>
+colors <span class="operator">=</span> [<span class="string">"new"</span>];        <span class="comment">// ❌ TypeError!</span></pre>
+
+    <div class="interview-answer">
+        "<code>const</code> protects the <strong>reference</strong> (the pointer to the memory location), not the <strong>value</strong> itself. Objects and arrays are stored in heap memory, and const only freezes the stack pointer. To make an object truly immutable, use <code>Object.freeze()</code> — but note that it's only shallow."
+    </div>
+
+    <h2><span class="section-num">5.6</span> Comparison Table</h2>
+
+    <table>
+        <thead>
+            <tr><th>Feature</th><th><code>var</code></th><th><code>let</code></th><th><code>const</code></th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Scope</strong></td><td>Function</td><td>Block <code>{}</code></td><td>Block <code>{}</code></td></tr>
+            <tr><td><strong>Hoisted?</strong></td><td>✅ (initialized with <code>undefined</code>)</td><td>✅ (TDZ — uninitialized)</td><td>✅ (TDZ — uninitialized)</td></tr>
+            <tr><td><strong>Re-declaration</strong></td><td>✅ Allowed</td><td>❌ Not allowed</td><td>❌ Not allowed</td></tr>
+            <tr><td><strong>Re-assignment</strong></td><td>✅ Allowed</td><td>✅ Allowed</td><td>❌ Not allowed</td></tr>
+            <tr><td><strong>Must initialize?</strong></td><td>No</td><td>No</td><td>✅ Yes</td></tr>
+            <tr><td><strong>Use case</strong></td><td>❌ Never</td><td>Values that change</td><td>Everything else (default)</td></tr>
+        </tbody>
+    </table>
+
+    <h2><span class="section-num">5.7</span> Memory — Stack vs Heap</h2>
+
+    <div class="diagram">
+        <pre>STACK MEMORY (fast, small)          HEAP MEMORY (slow, large)
+┌──────────────────────┐           ┌──────────────────────┐
+│ name = "Rahul"       │           │                      │
+│ age  = 25            │           │  { name: "Rahul",    │
+│ isStudent = true     │           │    age: 25 }         │
+│                      │           │         ↑            │
+│ user = ─────────────────────────→│   (object stored     │
+│        (reference/   │           │    in heap)          │
+│         pointer)     │           │                      │
+└──────────────────────┘           └──────────────────────┘
+
+Primitives → stored directly in STACK
+Objects, Arrays → stored in HEAP (stack holds reference)</pre>
+    </div>
+
+    <div class="best-practice">
+        <h4>🏆 Best Practice Rule</h4>
+        <p>✅ <strong>DEFAULT:</strong> Always use <code>const</code></p>
+        <p>↓ Need to reassign? Use <code>let</code></p>
+        <p>↓ <strong>Never</strong> use <code>var</code> (legacy code only)</p>
+    </div>
+
+    <!-- ==================== PART 6 ==================== -->
+    <div class="section-divider page-break"><span>Part 6</span></div>
+
+    <h1>6. Data Types — All 8</h1>
+
+    <h2><span class="section-num">6.1</span> Two Categories</h2>
+
+    <div class="diagram">
+        <pre>DATA TYPES
+├── PRIMITIVE (7 types) — Stack, Immutable, Compared by VALUE
+│   ├── String
+│   ├── Number
+│   ├── Boolean
+│   ├── undefined
+│   ├── null
+│   ├── Symbol (ES6)
+│   └── BigInt (ES2020)
+│
+└── NON-PRIMITIVE (1 type) — Heap, Mutable, Compared by REFERENCE
+    └── Object (includes Arrays, Functions, Dates, RegExp, etc.)</pre>
+    </div>
+
+    <h2><span class="section-num">6.2</span> Primitive Types — Detailed</h2>
+
+    <h3>1. String</h3>
+    <pre><span class="comment">// Three ways to create strings:</span>
+<span class="keyword">const</span> single <span class="operator">=</span> <span class="string">'Hello'</span>;           <span class="comment">// Single quotes</span>
+<span class="keyword">const</span> double <span class="operator">=</span> <span class="string">"Hello"</span>;           <span class="comment">// Double quotes</span>
+<span class="keyword">const</span> template <span class="operator">=</span> <span class="string">`Hello ${name}`</span>; <span class="comment">// Template literals (ES6)</span>
+
+<span class="comment">// Strings are IMMUTABLE:</span>
+<span class="keyword">let</span> str <span class="operator">=</span> <span class="string">"Hello"</span>;
+str[<span class="number">0</span>] <span class="operator">=</span> <span class="string">"J"</span>;        <span class="comment">// Silently fails</span>
+console.<span class="function">log</span>(str);    <span class="comment">// "Hello" (unchanged)</span>
+str <span class="operator">=</span> <span class="string">"Jello"</span>;       <span class="comment">// Works — creates a NEW string</span>
+
+<span class="comment">// Key string methods:</span>
+<span class="keyword">const</span> text <span class="operator">=</span> <span class="string">"Hello, World!"</span>;
+text.<span class="property">length</span>;              <span class="comment">// 13</span>
+text.<span class="function">toUpperCase</span>();       <span class="comment">// "HELLO, WORLD!"</span>
+text.<span class="function">toLowerCase</span>();       <span class="comment">// "hello, world!"</span>
+text.<span class="function">includes</span>(<span class="string">"World"</span>);  <span class="comment">// true</span>
+text.<span class="function">indexOf</span>(<span class="string">"World"</span>);   <span class="comment">// 7</span>
+text.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);        <span class="comment">// "Hello"</span>
+text.<span class="function">split</span>(<span class="string">", "</span>);        <span class="comment">// ["Hello", "World!"]</span>
+text.<span class="function">trim</span>();             <span class="comment">// Removes whitespace</span>
+text.<span class="function">replace</span>(<span class="string">"World"</span>, <span class="string">"JS"</span>); <span class="comment">// "Hello, JS!"</span></pre>
+
+    <h3>2. Number</h3>
+    <pre><span class="keyword">const</span> integer <span class="operator">=</span> <span class="number">42</span>;
+<span class="keyword">const</span> float <span class="operator">=</span> <span class="number">3.14</span>;       <span class="comment">// No separate float type!</span>
+<span class="keyword">const</span> hex <span class="operator">=</span> <span class="number">0xFF</span>;         <span class="comment">// 255</span>
+
+<span class="comment">// Special values:</span>
+<span class="builtin">Infinity</span>, <span class="operator">-</span><span class="builtin">Infinity</span>, <span class="builtin">NaN</span>
+
+<span class="comment">// NaN — the weird one:</span>
+console.<span class="function">log</span>(<span class="builtin">NaN</span> <span class="operator">===</span> <span class="builtin">NaN</span>);     <span class="comment">// false! (NaN is NOT equal to itself!)</span>
+console.<span class="function">log</span>(<span class="builtin">Number</span>.<span class="function">isNaN</span>(<span class="builtin">NaN</span>)); <span class="comment">// true (proper check)</span>
+
+<span class="comment">// Floating point precision:</span>
+console.<span class="function">log</span>(<span class="number">0.1</span> <span class="operator">+</span> <span class="number">0.2</span>);       <span class="comment">// 0.30000000000000004 (NOT 0.3!)</span>
+console.<span class="function">log</span>(<span class="number">0.1</span> <span class="operator">+</span> <span class="number">0.2</span> <span class="operator">===</span> <span class="number">0.3</span>); <span class="comment">// false!</span></pre>
+
+    <div class="interview-answer">
+        "JavaScript uses IEEE 754 double-precision floating-point format. Some decimal numbers like 0.1 and 0.2 cannot be represented exactly in binary, leading to tiny rounding errors. This is not JS-specific — it happens in most programming languages."
+    </div>
+
+    <h3>3. Boolean</h3>
+    <pre><span class="comment">// Falsy values (convert to false):</span>
+<span class="comment">// false, 0, -0, 0n, "", null, undefined, NaN</span>
+
+<span class="comment">// EVERYTHING else is truthy, including:</span>
+<span class="keyword">if</span> (<span class="string">"0"</span>) ...    <span class="comment">// ✅ truthy! (non-empty string)</span>
+<span class="keyword">if</span> ([]) ...     <span class="comment">// ✅ truthy! (empty array)</span>
+<span class="keyword">if</span> ({}) ...     <span class="comment">// ✅ truthy! (empty object)</span></pre>
+
+    <div class="callout callout-danger">
+        <div class="callout-title">🚨 Interview Favorite</div>
+        Empty array <code>[]</code> and empty object <code>{}</code> are <strong>TRUTHY</strong> in JavaScript! This catches many developers off guard.
+    </div>
+
+    <h3>4. undefined vs null</h3>
+    <table>
+        <thead>
+            <tr><th>Feature</th><th><code>undefined</code></th><th><code>null</code></th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Meaning</strong></td><td>Declared but not assigned</td><td>Intentionally empty</td></tr>
+            <tr><td><strong>Set by</strong></td><td>JavaScript engine</td><td>Programmer</td></tr>
+            <tr><td><strong>typeof</strong></td><td><code>"undefined"</code></td><td><code>"object"</code> (bug!)</td></tr>
+            <tr><td><strong>== comparison</strong></td><td><code>null == undefined</code> → true</td><td><code>null == undefined</code> → true</td></tr>
+            <tr><td><strong>=== comparison</strong></td><td><code>null === undefined</code> → false</td><td><code>null === undefined</code> → false</td></tr>
+        </tbody>
+    </table>
+
+    <div class="interview-answer">
+        "typeof null === 'object' is a known bug from JavaScript's first implementation in 1995. Values were stored with type tags — objects had tag 0, and null was the NULL pointer (0x00), giving it tag 0 too. Fixing it would break too much existing code."
+    </div>
+
+    <h3>5. Symbol (ES6)</h3>
+    <pre><span class="keyword">const</span> id1 <span class="operator">=</span> <span class="builtin">Symbol</span>(<span class="string">"id"</span>);
+<span class="keyword">const</span> id2 <span class="operator">=</span> <span class="builtin">Symbol</span>(<span class="string">"id"</span>);
+console.<span class="function">log</span>(id1 <span class="operator">===</span> id2);  <span class="comment">// false! (every Symbol is unique)</span>
+
+<span class="comment">// Use case: Unique object property keys</span>
+<span class="keyword">const</span> USER_ID <span class="operator">=</span> <span class="builtin">Symbol</span>(<span class="string">"userId"</span>);
+<span class="keyword">const</span> user <span class="operator">=</span> { [USER_ID]: <span class="number">12345</span>, <span class="property">name</span>: <span class="string">"Rahul"</span> };</pre>
+
+    <h3>6. BigInt (ES2020)</h3>
+    <pre><span class="keyword">const</span> big <span class="operator">=</span> <span class="number">9007199254740991n</span>;  <span class="comment">// Add 'n' at the end</span>
+<span class="comment">// Cannot mix with regular numbers:</span>
+<span class="comment">// big + 1  → ❌ TypeError</span>
+big <span class="operator">+</span> <span class="builtin">BigInt</span>(<span class="number">1</span>);  <span class="comment">// ✅</span></pre>
+
+    <h2><span class="section-num">6.3</span> Value vs Reference (MUST UNDERSTAND!)</h2>
+
+    <pre><span class="comment">// PRIMITIVES — Copied by VALUE</span>
+<span class="keyword">let</span> a <span class="operator">=</span> <span class="number">10</span>;
+<span class="keyword">let</span> b <span class="operator">=</span> a;     <span class="comment">// b gets a COPY</span>
+b <span class="operator">=</span> <span class="number">20</span>;
+console.<span class="function">log</span>(a);  <span class="comment">// 10 (unchanged!)</span>
+
+<span class="comment">// OBJECTS — Copied by REFERENCE</span>
+<span class="keyword">let</span> obj1 <span class="operator">=</span> { <span class="property">name</span>: <span class="string">"Rahul"</span> };
+<span class="keyword">let</span> obj2 <span class="operator">=</span> obj1;  <span class="comment">// obj2 gets same REFERENCE (pointer)</span>
+obj2.<span class="property">name</span> <span class="operator">=</span> <span class="string">"Amit"</span>;
+console.<span class="function">log</span>(obj1.<span class="property">name</span>);  <span class="comment">// "Amit" (changed! Same object)</span></pre>
+
+    <div class="diagram">
+        <pre>PRIMITIVES (by value):         OBJECTS (by reference):
+┌──────┐    ┌──────┐          ┌──────┐    ┌──────────────────┐
+│ a=10 │    │ b=20 │          │ obj1 │───→│ { name: "Rahul" }│
+└──────┘    └──────┘          └──────┘    └──────────────────┘
+  Independent copies          ┌──────┐         ↑
+                              │ obj2 │─────────┘
+                              └──────┘  Both point to SAME object</pre>
+    </div>
+
+    <h4>How to Create a True Copy</h4>
+    <pre><span class="comment">// Shallow copy:</span>
+<span class="keyword">const</span> copy1 <span class="operator">=</span> { ...original };              <span class="comment">// Spread operator</span>
+<span class="keyword">const</span> copy2 <span class="operator">=</span> <span class="builtin">Object</span>.<span class="function">assign</span>({}, original);  <span class="comment">// Object.assign</span>
+
+<span class="comment">// Deep copy:</span>
+<span class="keyword">const</span> deep1 <span class="operator">=</span> <span class="builtin">JSON</span>.<span class="function">parse</span>(<span class="builtin">JSON</span>.<span class="function">stringify</span>(original));  <span class="comment">// Has limitations</span>
+<span class="keyword">const</span> deep2 <span class="operator">=</span> <span class="function">structuredClone</span>(original);              <span class="comment">// ← BEST (2022+)</span></pre>
+
+    <!-- ==================== PART 7 ==================== -->
+    <div class="section-divider page-break"><span>Part 7</span></div>
+
+    <h1>7. The <code>typeof</code> Operator</h1>
+
+    <table>
+        <thead>
+            <tr><th>Expression</th><th>Result</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>typeof "hello"</code></td><td><code>"string"</code></td><td></td></tr>
+            <tr><td><code>typeof 42</code></td><td><code>"number"</code></td><td></td></tr>
+            <tr><td><code>typeof 3.14</code></td><td><code>"number"</code></td><td>No separate float type</td></tr>
+            <tr><td><code>typeof true</code></td><td><code>"boolean"</code></td><td></td></tr>
+            <tr><td><code>typeof undefined</code></td><td><code>"undefined"</code></td><td></td></tr>
+            <tr><td><code>typeof null</code></td><td><code>"object"</code></td><td>⚠️ Historical bug!</td></tr>
+            <tr><td><code>typeof Symbol()</code></td><td><code>"symbol"</code></td><td></td></tr>
+            <tr><td><code>typeof 42n</code></td><td><code>"bigint"</code></td><td></td></tr>
+            <tr><td><code>typeof {}</code></td><td><code>"object"</code></td><td></td></tr>
+            <tr><td><code>typeof []</code></td><td><code>"object"</code></td><td>⚠️ Arrays are objects!</td></tr>
+            <tr><td><code>typeof function(){}</code></td><td><code>"function"</code></td><td>Special case</td></tr>
+            <tr><td><code>typeof NaN</code></td><td><code>"number"</code></td><td>⚠️ NaN is a number!</td></tr>
+        </tbody>
+    </table>
+
+    <h4>Better Type Checking Methods:</h4>
+    <pre><span class="builtin">Array</span>.<span class="function">isArray</span>([]);                    <span class="comment">// true (arrays)</span>
+value <span class="operator">===</span> <span class="keyword">null</span>;                        <span class="comment">// true (null)</span>
+value <span class="keyword">instanceof</span> <span class="builtin">Date</span>;                 <span class="comment">// true (specific class)</span>
+<span class="builtin">Object</span>.prototype.<span class="function">toString</span>.<span class="function">call</span>(value);  <span class="comment">// "[object Array]" etc.</span></pre>
+
+    <!-- ==================== PART 8 ==================== -->
+    <div class="section-divider page-break"><span>Part 8</span></div>
+
+    <h1>8. Type Coercion &amp; Type Conversion</h1>
+
+    <h2><span class="section-num">8.1</span> Explicit Conversion (You do it)</h2>
+
+    <table>
+        <thead>
+            <tr><th>To String</th><th>To Number</th><th>To Boolean</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>String(123)</code> → "123"</td><td><code>Number("123")</code> → 123</td><td><code>Boolean(0)</code> → false</td></tr>
+            <tr><td><code>String(true)</code> → "true"</td><td><code>Number("")</code> → 0</td><td><code>Boolean("")</code> → false</td></tr>
+            <tr><td><code>String(null)</code> → "null"</td><td><code>Number("hello")</code> → NaN</td><td><code>Boolean("hello")</code> → true</td></tr>
+            <tr><td><code>(123).toString()</code></td><td><code>Number(true)</code> → 1</td><td><code>Boolean([])</code> → true ⚠️</td></tr>
+            <tr><td><code>123 + ""</code> (trick)</td><td><code>Number(null)</code> → 0</td><td><code>Boolean({})</code> → true ⚠️</td></tr>
+            <tr><td></td><td><code>Number(undefined)</code> → NaN</td><td><code>!!value</code> (double NOT trick)</td></tr>
+            <tr><td></td><td><code>+"42"</code> (unary plus trick)</td><td></td></tr>
+            <tr><td></td><td><code>parseInt("123px")</code> → 123</td><td></td></tr>
+        </tbody>
+    </table>
+
+    <h2><span class="section-num">8.2</span> Implicit Coercion (JS does it automatically)</h2>
+
+    <h3>Rule 1: String + anything = String</h3>
+    <pre>console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">+</span> <span class="number">3</span>);       <span class="comment">// "53" (3 → "3")</span>
+console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">+</span> <span class="boolean">true</span>);    <span class="comment">// "5true"</span>
+console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">+</span> <span class="keyword">null</span>);    <span class="comment">// "5null"</span>
+console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">+</span> {});      <span class="comment">// "5[object Object]"</span></pre>
+
+    <h3>Rule 2: Other math operators → Number</h3>
+    <pre>console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">-</span> <span class="number">3</span>);       <span class="comment">// 2</span>
+console.<span class="function">log</span>(<span class="string">"5"</span> <span class="operator">*</span> <span class="number">2</span>);       <span class="comment">// 10</span>
+console.<span class="function">log</span>(<span class="boolean">true</span> <span class="operator">+</span> <span class="boolean">true</span>);   <span class="comment">// 2</span>
+console.<span class="function">log</span>(<span class="string">"abc"</span> <span class="operator">-</span> <span class="number">1</span>);     <span class="comment">// NaN</span></pre>
+
+    <h3>Rule 3: <code>==</code> vs <code>===</code></h3>
+    <pre><span class="comment">// === Strict: NO coercion</span>
+<span class="number">5</span> <span class="operator">===</span> <span class="string">"5"</span>           <span class="comment">// false (different types)</span>
+
+<span class="comment">// == Loose: DOES coercion</span>
+<span class="number">5</span> <span class="operator">==</span> <span class="string">"5"</span>            <span class="comment">// true ("5" → 5)</span>
+<span class="number">0</span> <span class="operator">==</span> <span class="boolean">false</span>          <span class="comment">// true (false → 0)</span>
+<span class="string">""</span> <span class="operator">==</span> <span class="boolean">false</span>          <span class="comment">// true ("" → 0, false → 0)</span>
+<span class="keyword">null</span> <span class="operator">==</span> <span class="keyword">undefined</span>   <span class="comment">// true (special rule)</span>
+<span class="keyword">null</span> <span class="operator">==</span> <span class="number">0</span>            <span class="comment">// false</span>
+<span class="builtin">NaN</span> <span class="operator">==</span> <span class="builtin">NaN</span>          <span class="comment">// false (NaN ≠ anything)</span></pre>
+
+    <h4>The Abstract Equality Algorithm (<code>==</code> rules):</h4>
+    <div class="highlight-box">
+        <ol>
+            <li><strong>Same type?</strong> → Compare normally</li>
+            <li><strong>null == undefined?</strong> → true</li>
+            <li><strong>Number vs String?</strong> → Convert String to Number</li>
+            <li><strong>Boolean vs anything?</strong> → Convert Boolean to Number first, then compare</li>
+            <li><strong>Object vs Primitive?</strong> → Convert Object using <code>.valueOf()</code> then <code>.toString()</code></li>
+        </ol>
+    </div>
+
+    <h4>Example Walkthrough:</h4>
+    <pre><span class="string">""</span> <span class="operator">==</span> <span class="boolean">false</span>
+<span class="comment">// Step 1: Boolean vs String → Convert false to Number → 0</span>
+<span class="comment">// Now: "" == 0</span>
+<span class="comment">// Step 2: String vs Number → Convert "" to Number → 0</span>
+<span class="comment">// Now: 0 == 0</span>
+<span class="comment">// Result: true ✅</span></pre>
+
+    <h2><span class="section-num">8.3</span> Tricky Interview Questions</h2>
+
+    <pre>console.<span class="function">log</span>([] <span class="operator">+</span> []);             <span class="comment">// "" (empty string)</span>
+console.<span class="function">log</span>([] <span class="operator">+</span> {});             <span class="comment">// "[object Object]"</span>
+console.<span class="function">log</span>(<span class="boolean">true</span> <span class="operator">+</span> <span class="boolean">true</span> <span class="operator">+</span> <span class="boolean">true</span>);  <span class="comment">// 3</span>
+console.<span class="function">log</span>(<span class="boolean">true</span> <span class="operator">==</span> [<span class="number">1</span>]);          <span class="comment">// true (wild!)</span>
+console.<span class="function">log</span>(<span class="boolean">false</span> <span class="operator">==</span> []);           <span class="comment">// true</span>
+
+console.<span class="function">log</span>(<span class="operator">!!</span><span class="string">"false"</span>);             <span class="comment">// true (non-empty string)</span>
+console.<span class="function">log</span>(<span class="operator">!!</span><span class="string">""</span>);                  <span class="comment">// false</span>
+console.<span class="function">log</span>(<span class="operator">!!</span>[]);                  <span class="comment">// true (arrays are truthy!)</span>
+
+console.<span class="function">log</span>(<span class="number">1</span> <span class="operator">&lt;</span> <span class="number">2</span> <span class="operator">&lt;</span> <span class="number">3</span>);           <span class="comment">// true (but wrong reason!)</span>
+<span class="comment">// (1 &lt; 2) → true → (true &lt; 3) → (1 &lt; 3) → true</span>
+
+console.<span class="function">log</span>(<span class="number">3</span> <span class="operator">&gt;</span> <span class="number">2</span> <span class="operator">&gt;</span> <span class="number">1</span>);           <span class="comment">// false!</span>
+<span class="comment">// (3 &gt; 2) → true → (true &gt; 1) → (1 &gt; 1) → false!</span></pre>
+
+    <div class="best-practice">
+        <h4>✅ Best Practice</h4>
+        <p>ALWAYS use <code>===</code> (strict equality). NEVER use <code>==</code> (loose equality).</p>
+        <p>Only exception: <code>x == null</code> checks for both null and undefined.</p>
+    </div>
+
+    <!-- ==================== PRACTICE ==================== -->
+    <div class="section-divider page-break"><span>Practice</span></div>
+
+    <h1>📝 Practice Problems — Day 1 Homework</h1>
+
+    <h2>Problem Set A: Variables &amp; Scope</h2>
+    <pre><span class="comment">// 1. Predict the output:</span>
+<span class="keyword">var</span> a <span class="operator">=</span> <span class="number">1</span>;
+<span class="keyword">function</span> <span class="function">test</span>() {
+    console.<span class="function">log</span>(a);   <span class="comment">// ?</span>
+    <span class="keyword">var</span> a <span class="operator">=</span> <span class="number">2</span>;
+    console.<span class="function">log</span>(a);   <span class="comment">// ?</span>
+}
+<span class="function">test</span>();
+console.<span class="function">log</span>(a);       <span class="comment">// ?</span>
+
+<span class="comment">// 2. Predict the output:</span>
+<span class="keyword">let</span> x <span class="operator">=</span> <span class="number">10</span>;
+{
+    console.<span class="function">log</span>(x);   <span class="comment">// ? (TDZ question)</span>
+    <span class="keyword">let</span> x <span class="operator">=</span> <span class="number">20</span>;
+}
+
+<span class="comment">// 3. What happens? Why?</span>
+<span class="keyword">const</span> arr <span class="operator">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+arr.<span class="function">push</span>(<span class="number">4</span>);
+console.<span class="function">log</span>(arr);      <span class="comment">// ?</span>
+arr <span class="operator">=</span> [<span class="number">5</span>, <span class="number">6</span>];          <span class="comment">// ?</span></pre>
+
+    <h2>Problem Set B: Type Coercion</h2>
+    <pre><span class="comment">// Predict ALL outputs:</span>
+console.<span class="function">log</span>(<span class="number">1</span> <span class="operator">+</span> <span class="string">"2"</span> <span class="operator">+</span> <span class="string">"2"</span>);    <span class="comment">// ?</span>
+console.<span class="function">log</span>(<span class="number">1</span> <span class="operator">+</span> <span class="operator">+</span><span class="string">"2"</span> <span class="operator">+</span> <span class="string">"2"</span>);   <span class="comment">// ?</span>
+console.<span class="function">log</span>(<span class="number">1</span> <span class="operator">+</span> <span class="operator">-</span><span class="string">"1"</span> <span class="operator">+</span> <span class="string">"2"</span>);   <span class="comment">// ?</span>
+console.<span class="function">log</span>(<span class="operator">+</span><span class="string">"1"</span> <span class="operator">+</span> <span class="string">"1"</span> <span class="operator">+</span> <span class="string">"2"</span>); <span class="comment">// ?</span>
+console.<span class="function">log</span>(<span class="string">"A"</span> <span class="operator">-</span> <span class="string">"B"</span> <span class="operator">+</span> <span class="string">"2"</span>); <span class="comment">// ?</span>
+console.<span class="function">log</span>(<span class="string">"A"</span> <span class="operator">-</span> <span class="string">"B"</span> <span class="operator">+</span> <span class="number">2</span>);   <span class="comment">// ?</span></pre>
+
+    <h2>Problem Set C: Coding Challenges</h2>
+    <pre><span class="comment">// 1. Write a function that returns the true type of any value:</span>
+<span class="comment">//    trueType([])    → "array"</span>
+<span class="comment">//    trueType(null)  → "null"</span>
+<span class="comment">//    trueType(42)    → "number"</span>
+<span class="comment">//    trueType({})    → "object"</span>
+
+<span class="comment">// 2. Write a function that deep compares two values:</span>
+<span class="comment">//    deepEqual({a: 1, b: {c: 2}}, {a: 1, b: {c: 2}})  → true</span>
+<span class="comment">//    deepEqual([1, [2, 3]], [1, [2, 3]])                → true</span>
+
+<span class="comment">// 3. Write 10 examples where == gives true but === gives false</span></pre>
+
+    <h2>Problem Set D: Type Conversion Tricks</h2>
+    <pre><span class="comment">// Convert WITHOUT using Number(), String(), Boolean():</span>
+<span class="comment">// 1. String "42" → number 42</span>
+<span class="comment">// 2. Number 42 → string "42"</span>
+<span class="comment">// 3. Any value → boolean</span>
+<span class="comment">// 4. Array [1, 2, 3] → string "1,2,3"</span>
+<span class="comment">// 5. String "3.14" → float 3.14</span></pre>
+
+    <!-- ==================== CHEAT SHEET ==================== -->
+    <div class="section-divider page-break"><span>Interview Ready</span></div>
+
+    <h1>🎯 Day 1 — Interview Cheat Sheet</h1>
+
+    <div class="cheat-grid">
+        <div class="cheat-item">
+            <div class="q">Q: What happens when you type a URL in the browser?</div>
+            <div class="a">DNS lookup → TCP handshake → TLS handshake (HTTPS) → HTTP request → Server processes → HTTP response → Browser renders (DOM → CSSOM → Render Tree → Layout → Paint → Composite)</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: Difference between var, let, const?</div>
+            <div class="a"><code>var</code> is function-scoped and hoisted with <code>undefined</code>. <code>let</code> and <code>const</code> are block-scoped and hoisted but in TDZ. <code>const</code> can't be reassigned but object properties can be mutated.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: What is hoisting?</div>
+            <div class="a">JavaScript moves declarations to the top of their scope during the creation phase. <code>var</code> is initialized with <code>undefined</code>, <code>let</code>/<code>const</code> enter TDZ, function declarations are fully hoisted.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: What is TDZ (Temporal Dead Zone)?</div>
+            <div class="a">The period between entering a block and the <code>let</code>/<code>const</code> declaration being reached. Accessing the variable in TDZ throws <code>ReferenceError</code>.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: What are the 8 data types in JavaScript?</div>
+            <div class="a">Primitives: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>undefined</code>, <code>null</code>, <code>symbol</code>, <code>bigint</code>. Non-primitive: <code>object</code> (includes arrays, functions).</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: Why is typeof null === "object"?</div>
+            <div class="a">Historical bug from 1995. Values had type tags — objects used tag 0, null was NULL pointer (0x00) so got tag 0 too. Never fixed because it'd break existing code.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: Difference between == and ===?</div>
+            <div class="a"><code>===</code> checks type AND value without coercion. <code>==</code> performs type coercion before comparison. Always use <code>===</code>.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: What are falsy values in JavaScript?</div>
+            <div class="a"><code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>. Everything else is truthy — including <code>[]</code>, <code>{}</code>, and <code>"0"</code>.</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: Difference between null and undefined?</div>
+            <div class="a"><code>undefined</code> = declared but not assigned (set by JS engine). <code>null</code> = intentionally assigned empty value (set by programmer).</div>
+        </div>
+        <div class="cheat-item">
+            <div class="q">Q: How are primitives different from objects?</div>
+            <div class="a">Primitives are immutable, stored in stack, compared by value. Objects are mutable, stored in heap, compared by reference.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+        <p><strong>✅ Day 1 Complete!</strong></p>
+        <p>Tomorrow: Operators, Conditionals &amp; Loops</p>
+        <p style="color: var(--primary); margin-top: 8px;">MERN &amp; MEAN Stack Mastery — 8 Week Program</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "mern-mastery-lms",
+  "version": "1.0.0",
+  "description": "MERN Mastery LMS — 1 CR Product-Company Edition",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build:data": "python3 scripts/compile-lms-data.py",
+    "open": "open index.html"
+  },
+  "keywords": [
+    "mern",
+    "lms",
+    "system-design",
+    "interview-prep",
+    "product-companies"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
