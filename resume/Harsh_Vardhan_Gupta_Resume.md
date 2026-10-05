@@ -35,7 +35,7 @@ Full Stack Developer with 2.5+ years of experience building production web appli
 
 ---
 
-## Key Projects
+## Key Product Initiatives
 
 ### **Reelax AI Search** · *React.js, Node.js, Elasticsearch, LLM prompting* · [brands.getreelax.com](https://brands.getreelax.com)
 - Built a conversational AI search for influencer discovery: natural-language queries update filters, tags and creator tables in real time.
