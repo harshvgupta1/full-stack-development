@@ -11,7 +11,7 @@ Full Stack Developer with 2.5+ years of experience building production web appli
 
 ## Work Experience
 
-### **Full Stack Developer** · Bridgeness Technologies Pvt. Ltd. (Reelax, getreelax.com)
+### **Full Stack Developer** · Bridgeness Technologies Pvt. Ltd. (Reelax)
 *Noida, India · Jan 2024 – Present*
 
 - Build and maintain the React.js/Redux frontend and Node.js/Express backend of an influencer-marketing platform used by brands for discovery, campaigns, contracts and payouts.
@@ -22,29 +22,23 @@ Full Stack Developer with 2.5+ years of experience building production web appli
 - Debug production issues and tune performance across the stack.
 - Use Cursor and ChatGPT in daily engineering to speed up API development and feature delivery.
 
+### **Frontend Developer Intern** · Bridgeness Technologies Pvt. Ltd. (Reelax)
+*Noida, India · Jul 2023 – Dec 2023*
+
+- Developed and styled modular, responsive UI components using React.js, Redux, and CSS3 for brand discovery and creator dashboards.
+- Integrated RESTful APIs with frontend views and managed asynchronous state using Redux Toolkit.
+- Collaborated with senior engineers on code reviews, bug fixes, and performance optimization across browsers.
+
 ---
 
 ## Technical Skills
 
 - **Languages & Frontend:** JavaScript (ES6+), React.js, Redux, HTML5, CSS3, responsive UI
-- **Backend & APIs:** Node.js, Express.js, REST APIs, microservices, JWT authentication, BullMQ (job queues)
-- **Databases & Search:** MongoDB, MySQL, Redis, Elasticsearch
-- **Cloud & DevOps:** GCP, Azure, Docker, Git/GitHub
+- **Backend & APIs:** Node.js, Express.js, REST APIs, microservices, JWT authentication
+- **Databases & Search:** MongoDB, MySQL, Redis
+- **Cloud & DevOps:** GCP, Azure, Git/GitHub
 - **Integrations:** Razorpay, Cashfree, Instagram Graph API, Giddh, Zoho, OpenAI/LLM APIs
 - **AI & Tools:** Prompt engineering, LLM integrations, Cursor, ChatGPT, Postman, Figma, Agile/Scrum
-
----
-
-## Key Product Initiatives
-
-### **Reelax AI Search** · *React.js, Node.js, Elasticsearch, LLM prompting* · [brands.getreelax.com](https://brands.getreelax.com)
-- Built a conversational AI search for influencer discovery: natural-language queries update filters, tags and creator tables in real time.
-
-### **Reelax Brands Platform** · *React.js, Redux*
-- Developed the brand-facing single-page app for influencer discovery, campaigns, contracts, analytics and subscription management.
-
-### **Reelax Core API & Microservices** · *Node.js, Express, MongoDB, MySQL, Redis, BullMQ*
-- Designed the backend services and data models behind campaign processing, third-party integrations and payouts.
 
 ---
 
