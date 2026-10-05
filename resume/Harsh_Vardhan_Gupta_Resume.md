@@ -1,6 +1,6 @@
 # Harsh Vardhan Gupta
 **Full Stack Developer (MERN)** · Noida, India · +91 7905775453 · harsh872000@gmail.com  
-[LinkedIn](https://linkedin.com) · [GitHub](https://github.com/harshvgupta1) · [Portfolio](https://harshvgupta1.github.io/portfolio)
+[LinkedIn](https://linkedin.com/in/harsh-vardhan-g-684701134) · [GitHub](https://github.com/harshvgupta1) · [Portfolio](https://portfolio-fy9a.onrender.com)
 
 ---
 
