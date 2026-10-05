@@ -1,0 +1,60 @@
+# Harsh Vardhan Gupta
+**Full Stack Developer (MERN)** · Noida, India · +91 7905775453 · harsh872000@gmail.com  
+[LinkedIn](https://linkedin.com) · [GitHub](https://github.com/harshvgupta1) · [Portfolio](https://harshvgupta1.github.io/portfolio)
+
+---
+
+## Professional Summary
+Full Stack Developer with 2.5+ years of experience building production web applications on React.js, Node.js, MongoDB and MySQL. I design REST APIs and microservices, run background-job and search pipelines (BullMQ, Redis, Elasticsearch), and ship payment and third-party integrations. I also build LLM-powered features and use AI tooling to deliver faster. Looking for a full stack or backend-leaning role on a product team.
+
+---
+
+## Work Experience
+
+### **Full Stack Developer** · Bridgeness Technologies Pvt. Ltd. (Reelax, getreelax.com)
+*Noida, India · Jan 2024 – Present*
+
+- Build and maintain the React.js/Redux frontend and Node.js/Express backend of an influencer-marketing platform used by brands for discovery, campaigns, contracts and payouts.
+- Designed REST APIs and microservices on MongoDB and MySQL for campaign processing and payout administration, deployed on GCP and Azure.
+- Built asynchronous pipelines with BullMQ and Redis, and Elasticsearch-backed search for fast creator discovery.
+- Shipped an Instagram Graph API Comment-to-DM automation, plus integrations with Giddh and Zoho APIs.
+- Integrated Razorpay and Cashfree payments with JWT-based authentication.
+- Debug production issues and tune performance across the stack.
+- Use Cursor and ChatGPT in daily engineering to speed up API development and feature delivery.
+
+---
+
+## Technical Skills
+
+- **Languages & Frontend:** JavaScript (ES6+), React.js, Redux, HTML5, CSS3, responsive UI
+- **Backend & APIs:** Node.js, Express.js, REST APIs, microservices, JWT authentication, BullMQ (job queues)
+- **Databases & Search:** MongoDB, MySQL, Redis, Elasticsearch
+- **Cloud & DevOps:** GCP, Azure, Docker, Git/GitHub
+- **Integrations:** Razorpay, Cashfree, Instagram Graph API, Giddh, Zoho, OpenAI/LLM APIs
+- **AI & Tools:** Prompt engineering, LLM integrations, Cursor, ChatGPT, Postman, Figma, Agile/Scrum
+
+---
+
+## Key Projects
+
+### **Reelax AI Search** · *React.js, Node.js, Elasticsearch, LLM prompting* · [brands.getreelax.com](https://brands.getreelax.com)
+- Built a conversational AI search for influencer discovery: natural-language queries update filters, tags and creator tables in real time.
+
+### **Reelax Brands Platform** · *React.js, Redux*
+- Developed the brand-facing single-page app for influencer discovery, campaigns, contracts, analytics and subscription management.
+
+### **Reelax Core API & Microservices** · *Node.js, Express, MongoDB, MySQL, Redis, BullMQ*
+- Designed the backend services and data models behind campaign processing, third-party integrations and payouts.
+
+---
+
+## Education
+
+### **B.Tech, Electronics & Communication Engineering**
+*Lakshmi Narain College of Technology & Science, Bhopal · 2019 – 2023 · CGPA 8.33/10*
+
+---
+
+## Languages
+- **English:** Full professional
+- **Hindi:** Native
