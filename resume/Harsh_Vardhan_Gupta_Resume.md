@@ -11,6 +11,13 @@ Full Stack Developer with 2.5+ years of experience building production web appli
 
 ## Work Experience
 
+### **Frontend Developer Intern** · Bridgeness Technologies Pvt. Ltd. (Reelax)
+*Noida, India · Jul 2023 – Dec 2023*
+
+- Developed and styled modular, responsive UI components using React.js, Redux, and CSS3 for brand discovery and creator dashboards.
+- Integrated RESTful APIs with frontend views and managed asynchronous state using Redux Toolkit.
+- Collaborated with senior engineers on code reviews, bug fixes, and performance optimization across browsers.
+
 ### **Full Stack Developer** · Bridgeness Technologies Pvt. Ltd. (Reelax)
 *Noida, India · Jan 2024 – Present*
 
@@ -21,13 +28,6 @@ Full Stack Developer with 2.5+ years of experience building production web appli
 - Integrated Razorpay and Cashfree payments with JWT-based authentication.
 - Debug production issues and tune performance across the stack.
 - Use Cursor and ChatGPT in daily engineering to speed up API development and feature delivery.
-
-### **Frontend Developer Intern** · Bridgeness Technologies Pvt. Ltd. (Reelax)
-*Noida, India · Jul 2023 – Dec 2023*
-
-- Developed and styled modular, responsive UI components using React.js, Redux, and CSS3 for brand discovery and creator dashboards.
-- Integrated RESTful APIs with frontend views and managed asynchronous state using Redux Toolkit.
-- Collaborated with senior engineers on code reviews, bug fixes, and performance optimization across browsers.
 
 ---
 

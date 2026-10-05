@@ -18,7 +18,6 @@ function parseResumeText(txt) {
       const url = parts.slice(1).join(':').trim();
       links.push({ label, url });
     } else if (line.length > 0) {
-      // could be extra contact line
       if (!contact) contact = line;
       else contact += ' · ' + line;
     }
@@ -63,9 +62,9 @@ function buildHTML(data) {
       const langText = sec.items.join(' ');
       bodyHTML = `<p>${langText}</p>`;
     } else if (title === 'EDUCATION') {
-      const eduLines = sec.items;
+      const eduLines = sec.items.filter(l => l && l.trim());
       bodyHTML = eduLines.map(line => {
-        const parts = line.split('·').map(p => p.trim());
+        const parts = line.split('·').map(p => p.trim()).filter(Boolean);
         if (parts.length >= 2) {
           const degreeCollege = parts.slice(0, parts.length - 2).join(' <span class="divider">·</span> ') || parts[0];
           const year = parts[parts.length - 2] || '';
@@ -78,7 +77,7 @@ function buildHTML(data) {
         return `<p>${line}</p>`;
       }).join('\n');
     } else if (title === 'TECHNICAL SKILLS' || title === 'SKILLS') {
-      const skillItems = sec.items.map(item => {
+      const skillItems = sec.items.filter(l => l && l.trim()).map(item => {
         const cleaned = item.replace(/^-\s*/, '');
         const colonIdx = cleaned.indexOf(':');
         if (colonIdx !== -1) {
@@ -94,8 +93,9 @@ function buildHTML(data) {
       let jobs = [];
 
       for (const item of sec.items) {
+        if (!item || item.trim() === '') continue;
         if (!item.startsWith('-')) {
-          const parts = item.split('·').map(p => p.trim());
+          const parts = item.split('·').map(p => p.trim()).filter(Boolean);
           const roleCompany = parts.slice(0, parts.length - 2).join(' <span class="divider">·</span> ') || parts[0];
           const location = parts[parts.length - 2] || '';
           const date = parts[parts.length - 1] || '';
@@ -119,13 +119,14 @@ function buildHTML(data) {
           ${j.bullets.map(b => `<li>${b}</li>`).join('\n')}
         </ul>
       `).join('\n');
-    } else if (title === 'KEY PROJECTS' || title === 'PROJECTS') {
+    } else if (title === 'KEY PROJECTS' || title === 'KEY PRODUCT INITIATIVES' || title === 'PROJECTS') {
       let currentProject = null;
       let projects = [];
 
       for (const item of sec.items) {
+        if (!item || item.trim() === '') continue;
         if (!item.startsWith('-')) {
-          const parts = item.split('·').map(p => p.trim());
+          const parts = item.split('·').map(p => p.trim()).filter(Boolean);
           const title = parts[0];
           let link = '';
           let stackParts = parts.slice(1);
@@ -156,7 +157,7 @@ function buildHTML(data) {
       `).join('\n');
     } else {
       // Generic section
-      bodyHTML = sec.items.map(item => {
+      bodyHTML = sec.items.filter(l => l && l.trim()).map(item => {
         if (item.startsWith('-')) return `<li>${item.replace(/^-\s*/, '')}</li>`;
         return `<p>${item}</p>`;
       }).join('\n');
@@ -373,7 +374,6 @@ function buildHTML(data) {
 }
 
 async function convertTxtToPdf() {
-  // Check text file source (prioritize desktop resume.txt if edited, else workspace)
   const desktopTxt = '/Users/reelax/Desktop/resume.txt';
   const localTxt = path.join(__dirname, 'resume.txt');
   let sourceTxtPath = localTxt;
@@ -383,8 +383,10 @@ async function convertTxtToPdf() {
     const localStat = fs.existsSync(localTxt) ? fs.statSync(localTxt) : { mtimeMs: 0 };
     if (desktopStat.mtimeMs > localStat.mtimeMs) {
       sourceTxtPath = desktopTxt;
-      // sync back to workspace
       fs.copyFileSync(desktopTxt, localTxt);
+    } else {
+      sourceTxtPath = localTxt;
+      fs.copyFileSync(localTxt, desktopTxt);
     }
   }
 
