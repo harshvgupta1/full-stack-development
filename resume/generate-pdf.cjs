@@ -17,8 +17,8 @@ async function generatePDF() {
     format: 'A4',
     printBackground: true,
     margin: {
-      top: '10mm',
-      bottom: '10mm',
+      top: '8mm',
+      bottom: '8mm',
       left: '10mm',
       right: '10mm'
     }
